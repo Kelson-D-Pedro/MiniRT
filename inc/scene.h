@@ -6,12 +6,15 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:47:54 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/06 11:37:30 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/07 12:13:57 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCENE_H
 # define SCENE_H
+# ifndef MIN
+#  define MIN -2147483648.0
+# endif
 
 # include "vector.h"
 
@@ -51,6 +54,7 @@ typedef struct s_sphere
 {
 	t_vector			position;
 	double				diameter;
+	double				radius;
 	t_rgb_color			color;
 }						t_sphere;
 
@@ -67,6 +71,7 @@ typedef struct s_cylinder
 	t_vector			normal_vector;
 	double				height;
 	double				diameter;
+	double				radius;
 	t_rgb_color			color;
 }						t_cylinder;
 

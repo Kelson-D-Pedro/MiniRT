@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:48:59 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/04 15:10:30 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/07 11:44:54 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	fill_sphere(t_elements *rt, char **mat)
 	rt->sphere[i].color.blue = ft_atoi(vector[2]);
 	free_matrix((void **)vector);
 	rt->sphere[i].diameter = ft_atod(mat[2], 1, 0, 0);
+	rt->sphere[i].radius = rt->sphere[i].diameter / 2;
 	i++;
 	return ;
 }
@@ -95,6 +96,7 @@ void	fill_cylinder(t_elements *rt, char **mat)
 	free_matrix((void **)vector);
 	rt->cylinder[i].diameter = ft_atod(mat[3], 1, 0, 0);
 	rt->cylinder[i].height = ft_atod(mat[4], 1, 0, 0);
+	rt->cylinder[i].radius = rt->cylinder[i].diameter / 2;
 	i++;
 	return ;
 }
