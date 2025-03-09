@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection00.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
+/*   By: darwin <darwin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 15:31:46 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/07 13:06:59 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/09 19:36:50 by darwin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,32 @@ double	plane_intersection(t_plane *plane, t_ray *ray)
 	if (t < 0)
 		return (MIN);
 	return (t);
+}
+
+double cylinder_sides_intersection(t_cylinder *cylinder, t_ray *ray)
+{
+	double	A;
+	double	B;
+	double	C;
+	double	delta;
+	double	roots[2];
+	
+	A = (ray->direction.x * ray->direction.x) + (ray->direction.z * ray->direction.z);
+	B = 2 * (ray->direction.x * (ray->origin.x - cylinder->position.x) + 
+			ray->direction.z * (ray->origin.z - cylinder->position.z));
+	C =  ((ray->origin.x * ray->origin.x) + (ray->origin.z * ray->origin.z)) - 2 * 
+			(ray->origin.x * cylinder->position.x) - 2 * (ray->origin.z * cylinder->position.z) + 
+			(cylinder->position.x * cylinder->position.x) + (cylinder->position.z * cylinder->position.z) - (cylinder->radius * cylinder->radius);
+	delta = (B * B) - (4 * A * C);
+	if (delta < 0)
+		return (MIN);
+	roots[0] = (-B + sqrt(delta)) / (2 * A);
+	roots[1] = (-B - sqrt(delta)) / (2 * A);
+	if (roots[0] > 0 && roots[1] > 0)
+		return (fmin(roots[0], roots[1]));
+	else if (roots[0] > 0)
+		return (roots[0]);
+	else if (roots[1] > 0)
+		return (roots[1]);
+	return (MIN);
 }
