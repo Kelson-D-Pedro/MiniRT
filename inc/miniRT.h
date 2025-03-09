@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
+/*   By: darwin <darwin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:48:06 by kpedro            #+#    #+#             */
-/*   Updated: 2025/02/24 13:16:20 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/09 20:38:10 by darwin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define MINIRT_H
 
 # include "../libft/libft.h"
-# include "../minilibx/mlx.h"
+//# include "../minilibx/mlx.h"
 # include "scene.h"
 # include "vector.h"
 
