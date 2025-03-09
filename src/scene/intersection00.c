@@ -6,7 +6,7 @@
 /*   By: darwin <darwin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 15:31:46 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/09 23:52:38 by darwin           ###   ########.fr       */
+/*   Updated: 2025/03/09 23:57:46 by darwin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ static double	cover_intersection_aux(double *t, t_ray *ray, t_cylinder *cy)
 				if (aux == -1 || t[i] < aux)
 					aux = t[i]; 
 		}
+		i++;
 	}
 	return (aux);
 }
