@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 15:31:46 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/12 13:37:26 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/12 18:25:07 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ double	cylinder_sides_heigth(double t, t_cylinder *cy, t_ray *ray)
 	t_vector	point;
 	double		y_min;
 	double		y_max;
-	double		t[2];
 
 	y_min = cy->normal_vector.y;
 	y_max = y_min + cy->height;
