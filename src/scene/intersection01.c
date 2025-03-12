@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 18:04:59 by darwin            #+#    #+#             */
-/*   Updated: 2025/03/12 13:53:19 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/12 14:12:15 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ double	cylinder_cover_intersection(t_cylinder *cy, t_ray *ray)
 		return (-1);
 	t[0] = (y_min - ray->origin.y) / ray->direction.y;
 	t[1] = (y_max - ray->origin.y) / ray->direction.y;
-	return (cylinder_cover_intersection_aux(t, ray, cy));
+	return (cover_intersection_aux(t, ray, cy));
 }
 
 t_pair	which_sphere(t_elements *rt, t_ray *ray)
@@ -108,4 +108,3 @@ t_pair	which_plane(t_elements *rt, t_ray *ray)
 	free(pairs);
 	return (closest);
 }
-
