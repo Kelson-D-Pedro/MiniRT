@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection00.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darwin <darwin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 15:31:46 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/11 18:06:38 by darwin           ###   ########.fr       */
+/*   Updated: 2025/03/12 13:37:26 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,22 @@ double	plane_intersection(t_plane *plane, t_ray *ray)
 	return (t);
 }
 
-double cylinder_sides_intersection(t_cylinder *cy, t_ray *ray)
+double	cylinder_sides_intersection(t_cylinder *cy, t_ray *ray)
 {
 	double	A;
 	double	B;
 	double	C;
 	double	delta;
 	double	roots[2];
-	
-	A = (ray->direction.x * ray->direction.x) + (ray->direction.z * ray->direction.z);
-	B = 2 * (ray->direction.x * (ray->origin.x - cy->position.x) + 
-			ray->direction.z * (ray->origin.z - cy->position.z));
-	C =  ((ray->origin.x * ray->origin.x) + (ray->origin.z * ray->origin.z)) - 2 * 
-			(ray->origin.x * cy->position.x) - 2 * (ray->origin.z * cy->position.z) + 
-			(cy->position.x * cy->position.x) + (cy->position.z * cy->position.z) - (cy->radius * cy->radius);
+
+	A = (ray->direction.x * ray->direction.x) + (ray->direction.z
+			* ray->direction.z);
+	B = 2 * (ray->direction.x * (ray->origin.x - cy->position.x)
+			+ ray->direction.z * (ray->origin.z - cy->position.z));
+	C = ((ray->origin.x * ray->origin.x) + (ray->origin.z * ray->origin.z)) - 2
+		* (ray->origin.x * cy->position.x) - 2 * (ray->origin.z
+			* cy->position.z) + (cy->position.x * cy->position.x)
+		+ (cy->position.z * cy->position.z) - (cy->radius * cy->radius);
 	delta = (B * B) - (4 * A * C);
 	if (delta < 0 || A == 0)
 		return (-1);
@@ -84,12 +86,12 @@ double cylinder_sides_intersection(t_cylinder *cy, t_ray *ray)
 	return (-1);
 }
 
-double cylinder_sides_heigth(double t, t_cylinder *cy, t_ray *ray)
+double	cylinder_sides_heigth(double t, t_cylinder *cy, t_ray *ray)
 {
-	t_vector point;
-	double	y_min;
-	double	y_max;
-	double	t[2];
+	t_vector	point;
+	double		y_min;
+	double		y_max;
+	double		t[2];
 
 	y_min = cy->normal_vector.y;
 	y_max = y_min + cy->height;
