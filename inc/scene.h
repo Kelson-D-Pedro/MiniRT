@@ -6,7 +6,7 @@
 /*   By: darwin <darwin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:47:54 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/09 23:40:35 by darwin           ###   ########.fr       */
+/*   Updated: 2025/03/11 19:39:33 by darwin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,13 @@ typedef struct s_elements
 	t_mlx				mini_lx;
 	char				**map;
 }						t_elements;
+
+typedef struct s_pair
+{
+	int	index;
+	double t;
+}						t_pair;
+
 
 //
 //------------------------------- T_CAMERA FUNCTIONS
