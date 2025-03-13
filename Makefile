@@ -1,5 +1,6 @@
 NAME	=	miniRT
 CFLAGS	=	-Wall -Wextra -Werror
+MLX_DIR =	minilibx-linux
 SRC		=	miniRT \
 			src/parsing/parser00 src/parsing/parser01 src/parsing/parser02 src/parsing/parser03 src/parsing/parser04 \
 			src/parsing/parser05 src/parsing/parser06 \
@@ -9,7 +10,7 @@ SRC		=	miniRT \
 SRCS	=	$(addsuffix .c, ${SRC})
 OBJS	=	$(SRCS:.c=.o)
 LIBFT	=	libft/libft.a
-MLX	=	-L./minilibx/ -lmlx -lX11 -lXext
+MLX	=	-L./$(MLX_DIR) -lmlx -lX11 -lXext
 
 all: ${NAME}
 
@@ -18,11 +19,11 @@ all: ${NAME}
 
 ${NAME}: ${OBJS}
 	@make -s -C libft
-	@make -s -C minilibx
+	@make -s -C $(MLX_DIR)
 	@cc ${CFLAGS} ${OBJS} -o ${NAME} ${MLX} ${LIBFT} -lm
 
 clean:
-	@make clean -s -C minilibx
+	@make clean -s -C $(MLX_DIR)
 	@make clean -s -C libft
 	@rm -f ${OBJS}
 	clear

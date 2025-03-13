@@ -20,6 +20,7 @@ int	main(int argc, char *argv[])
 		return (1);
 	fill_elements(&rt);
 	init_mlx_win(&rt);
+	init_mlx_win(&rt);
 	mlx_loop(rt.mini_lx.mlx);
 	free_matrix((void **)rt.map);
 	return (0);

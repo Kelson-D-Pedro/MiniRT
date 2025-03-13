@@ -14,7 +14,7 @@
 # define MINIRT_H
 
 # include "../libft/libft.h"
-# include "../minilibx/mlx.h"
+# include "../minilibx-linux/mlx.h"
 # include "scene.h"
 # include "vector.h"
 
