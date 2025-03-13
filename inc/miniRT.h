@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:48:06 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/13 12:05:29 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/13 12:29:02 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int		its_alright_to_start(t_elements *rt, char **argv, int argc);
 
 double	sphere_intersection(t_sphere *sphere, t_ray *ray);
 double	plane_intersection(t_plane *plane, t_ray *ray);
+double	cylinder_intersection(t_cylinder *cy, t_ray *ray);
 double	cylinder_sides_intersection(t_cylinder *cy, t_ray *ray);
 double	validate_cylinder_sides_heigth(double t, t_cylinder *cy, t_ray *ray);
 double	cylinder_cover_intersection(t_cylinder *cy, t_ray *ray);

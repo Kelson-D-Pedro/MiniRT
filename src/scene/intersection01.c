@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 18:04:59 by darwin            #+#    #+#             */
-/*   Updated: 2025/03/13 12:21:11 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/13 12:41:02 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,24 +109,24 @@ t_pair	which_plane(t_elements *rt, t_ray *ray)
 	return (closest);
 }
 
-t_pair	which_plane(t_elements *rt, t_ray *ray)
+t_pair	which_cylinder(t_elements *rt, t_ray *ray)
 {
 	int		i;
 	t_pair	*pairs;
 	t_pair	closest;
 
 	i = 0;
-	if (rt->nb.plane <= 0)
+	if (rt->nb.cylinder <= 0)
 		return ((t_pair){-1, -1});
-	pairs = malloc(sizeof(t_pair) * rt->nb.plane);
-	while (i < rt->nb.plane)
+	pairs = malloc(sizeof(t_pair) * rt->nb.cylinder);
+	while (i < rt->nb.cylinder)
 	{
 		pairs[i].index = i;
-		pairs[i].t = plane_intersection(&rt->plane[i++], ray);
+		pairs[i].t = cylinder_intersection(&rt->cylinder[i++], ray);
 	}
 	i = 0;
 	closest = (t_pair){-1, INFINITY};
-	while (i < (rt->nb.plane))
+	while (i < (rt->nb.cylinder))
 	{
 		if (pairs[i].t > EPSILON && pairs[i].t < closest.t)
 			closest = pairs[i];

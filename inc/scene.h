@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:47:54 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/13 11:38:01 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/13 14:40:30 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,12 +121,18 @@ typedef struct s_pair
 }						t_pair;
 
 //
-//------------------------------- T_CAMERA FUNCTIONS
+//------------------------------- T_PAIR FUNCTIONS
 //
 
+t_pair					which_sphere(t_elements *rt, t_ray *ray);
+t_pair					which_plane(t_elements *rt, t_ray *ray);
+t_pair					which_cylinder(t_elements *rt, t_ray *ray);
+
 //
-//------------------------------- T_LIGHT FUNCTIONS
+//------------------------------- T_VECTOR FUNCTIONS
 //
+
+t_vector				gen_point(double t, t_ray *ray);
 
 //
 //------------------------------- T_AMBIENT_LIGHT FUNCTIONS
