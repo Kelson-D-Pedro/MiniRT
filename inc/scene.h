@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darwin <darwin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:47:54 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/11 19:39:33 by darwin           ###   ########.fr       */
+/*   Updated: 2025/03/13 11:38:01 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,21 @@ typedef struct s_ambient_light
 
 typedef struct s_camera
 {
-	t_vector			view_point;
-	t_vector			orientation;
+	t_vector			pos;
+	t_vector			dir;
 	double				fov;
 }						t_camera;
 
 typedef struct s_light
 {
-	t_vector			position;
+	t_vector			pos;
 	double				brightness;
 	t_rgb_color			color;
 }						t_light;
 
 typedef struct s_sphere
 {
-	t_vector			position;
+	t_vector			pos;
 	double				diameter;
 	double				radius;
 	t_rgb_color			color;
@@ -57,15 +57,15 @@ typedef struct s_sphere
 
 typedef struct s_plane
 {
-	t_vector			position;
-	t_vector			normal_vector;
+	t_vector			pos;
+	t_vector			dir;
 	t_rgb_color			color;
 }						t_plane;
 
 typedef struct s_cylinder
 {
-	t_vector			position;
-	t_vector			normal_vector;
+	t_vector			pos;
+	t_vector			dir;
 	double				height;
 	double				diameter;
 	double				radius;
@@ -98,7 +98,7 @@ typedef struct s_mlx
 typedef struct s_ray
 {
 	t_vector			origin;
-	t_vector			direction;
+	t_vector			dir;
 }						t_ray;
 
 typedef struct s_elements
@@ -116,10 +116,9 @@ typedef struct s_elements
 
 typedef struct s_pair
 {
-	int	index;
-	double t;
+	int					index;
+	double				t;
 }						t_pair;
-
 
 //
 //------------------------------- T_CAMERA FUNCTIONS
