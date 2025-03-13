@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:48:59 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/07 11:44:54 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/13 11:51:18 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	fill_light(t_elements *rt, char **mat)
 	char	**vector;
 
 	vector = ft_split(mat[1], ',');
-	rt->light.position.x = ft_atod(vector[0], 1, 0, 0);
-	rt->light.position.y = ft_atod(vector[1], 1, 0, 0);
-	rt->light.position.z = ft_atod(vector[2], 1, 0, 0);
+	rt->light.pos.x = ft_atod(vector[0], 1, 0, 0);
+	rt->light.pos.y = ft_atod(vector[1], 1, 0, 0);
+	rt->light.pos.z = ft_atod(vector[2], 1, 0, 0);
 	free_matrix((void **)vector);
 	vector = ft_split(mat[3], ',');
 	rt->light.color.red = ft_atoi(vector[0]);
@@ -35,9 +35,9 @@ void	fill_sphere(t_elements *rt, char **mat)
 	char		**vector;
 
 	vector = ft_split(mat[1], ',');
-	rt->sphere[i].position.x = ft_atod(vector[0], 1, 0, 0);
-	rt->sphere[i].position.y = ft_atod(vector[1], 1, 0, 0);
-	rt->sphere[i].position.z = ft_atod(vector[2], 1, 0, 0);
+	rt->sphere[i].pos.x = ft_atod(vector[0], 1, 0, 0);
+	rt->sphere[i].pos.y = ft_atod(vector[1], 1, 0, 0);
+	rt->sphere[i].pos.z = ft_atod(vector[2], 1, 0, 0);
 	free_matrix((void **)vector);
 	vector = ft_split(mat[3], ',');
 	rt->sphere[i].color.red = ft_atoi(vector[0]);
@@ -56,14 +56,14 @@ void	fill_plane(t_elements *rt, char **mat)
 	static int	i;
 
 	vector = ft_split(mat[1], ',');
-	rt->plane[i].position.x = ft_atod(vector[0], 1, 0, 0);
-	rt->plane[i].position.y = ft_atod(vector[1], 1, 0, 0);
-	rt->plane[i].position.z = ft_atod(vector[2], 1, 0, 0);
+	rt->plane[i].pos.x = ft_atod(vector[0], 1, 0, 0);
+	rt->plane[i].pos.y = ft_atod(vector[1], 1, 0, 0);
+	rt->plane[i].pos.z = ft_atod(vector[2], 1, 0, 0);
 	free_matrix((void **)vector);
 	vector = ft_split(mat[2], ',');
-	rt->plane[i].normal_vector.x = ft_atod(vector[0], 1, 0, 0);
-	rt->plane[i].normal_vector.y = ft_atod(vector[1], 1, 0, 0);
-	rt->plane[i].normal_vector.z = ft_atod(vector[2], 1, 0, 0);
+	rt->plane[i].dir.x = ft_atod(vector[0], 1, 0, 0);
+	rt->plane[i].dir.y = ft_atod(vector[1], 1, 0, 0);
+	rt->plane[i].dir.z = ft_atod(vector[2], 1, 0, 0);
 	free_matrix((void **)vector);
 	vector = ft_split(mat[3], ',');
 	rt->plane[i].color.red = ft_atoi(vector[0]);
@@ -80,14 +80,14 @@ void	fill_cylinder(t_elements *rt, char **mat)
 	static int	i;
 
 	vector = ft_split(mat[1], ',');
-	rt->cylinder[i].position.x = ft_atod(vector[0], 1, 0, 0);
-	rt->cylinder[i].position.y = ft_atod(vector[1], 1, 0, 0);
-	rt->cylinder[i].position.z = ft_atod(vector[2], 1, 0, 0);
+	rt->cylinder[i].pos.x = ft_atod(vector[0], 1, 0, 0);
+	rt->cylinder[i].pos.y = ft_atod(vector[1], 1, 0, 0);
+	rt->cylinder[i].pos.z = ft_atod(vector[2], 1, 0, 0);
 	free_matrix((void **)vector);
 	vector = ft_split(mat[2], ',');
-	rt->cylinder[i].normal_vector.x = ft_atod(vector[0], 1, 0, 0);
-	rt->cylinder[i].normal_vector.y = ft_atod(vector[1], 1, 0, 0);
-	rt->cylinder[i].normal_vector.z = ft_atod(vector[2], 1, 0, 0);
+	rt->cylinder[i].dir.x = ft_atod(vector[0], 1, 0, 0);
+	rt->cylinder[i].dir.y = ft_atod(vector[1], 1, 0, 0);
+	rt->cylinder[i].dir.z = ft_atod(vector[2], 1, 0, 0);
 	free_matrix((void **)vector);
 	vector = ft_split(mat[5], ',');
 	rt->cylinder[i].color.red = ft_atoi(vector[0]);

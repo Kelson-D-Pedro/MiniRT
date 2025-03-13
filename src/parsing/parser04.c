@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 18:01:29 by kpedro            #+#    #+#             */
-/*   Updated: 2025/02/19 16:39:59 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/13 11:49:55 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,14 @@ void	fill_camera(t_elements *rt, char **mat)
 	char	**vector;
 
 	vector = ft_split(mat[1], ',');
-	rt->camera.view_point.x = ft_atod(vector[0], 1, 0, 0);
-	rt->camera.view_point.y = ft_atod(vector[1], 1, 0, 0);
-	rt->camera.view_point.z = ft_atod(vector[2], 1, 0, 0);
+	rt->camera.pos.x = ft_atod(vector[0], 1, 0, 0);
+	rt->camera.pos.y = ft_atod(vector[1], 1, 0, 0);
+	rt->camera.pos.z = ft_atod(vector[2], 1, 0, 0);
 	free_matrix((void **)vector);
 	vector = ft_split(mat[2], ',');
-	rt->camera.orientation.x = ft_atod(vector[0], 1, 0, 0);
-	rt->camera.orientation.y = ft_atod(vector[1], 1, 0, 0);
-	rt->camera.orientation.z = ft_atod(vector[2], 1, 0, 0);
+	rt->camera.dir.x = ft_atod(vector[0], 1, 0, 0);
+	rt->camera.dir.y = ft_atod(vector[1], 1, 0, 0);
+	rt->camera.dir.z = ft_atod(vector[2], 1, 0, 0);
 	free_matrix((void **)vector);
 	rt->camera.fov = ft_atod(mat[3], 1, 0, 0);
 	return ;

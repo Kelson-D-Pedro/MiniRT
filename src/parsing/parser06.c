@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:13:28 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/03 17:31:07 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/13 11:51:52 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ void	choice_who_fill(t_elements *rt, char **mat)
 
 void	normalize(t_elements *rt)
 {
-	if (!is_normalized(rt->camera.orientation))
-		vector_normalize(&rt->camera.orientation);
+	if (!is_normalized(rt->camera.dir))
+		vector_normalize(&rt->camera.dir);
 	if (rt->nb.cylinder)
-		if (!is_normalized(rt->cylinder->normal_vector))
-			vector_normalize(&rt->cylinder->normal_vector);
+		if (!is_normalized(rt->cylinder->dir))
+			vector_normalize(&rt->cylinder->dir);
 	if (rt->nb.plane)
-		if (!is_normalized(rt->plane->normal_vector))
-			vector_normalize(&rt->plane->normal_vector);
+		if (!is_normalized(rt->plane->dir))
+			vector_normalize(&rt->plane->dir);
 }

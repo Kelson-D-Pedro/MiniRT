@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 17:10:20 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/03 16:28:10 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/13 12:03:57 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	vector_normalize(t_vector *vec)
 	vec->y /= magnitude;
 	vec->z /= magnitude;
 }
+
 double	vector_magnitude(t_vector vec)
 {
 	return (sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z));

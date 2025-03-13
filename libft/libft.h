@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darwin <darwin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 07:10:04 by kpedro            #+#    #+#             */
-/*   Updated: 2025/02/12 15:44:43 by darwin           ###   ########.fr       */
+/*   Updated: 2025/03/13 11:58:47 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,5 +151,5 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 //--------------------------------DOUBLE FUNCTIONS
 //
 
-double	ft_atod(char *str, int sign, int i, int exp);
+double				ft_atod(char *str, int sign, int i, int exp);
 #endif
