@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:36:09 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/13 14:38:43 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/14 14:41:45 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,43 @@ t_vector	gen_point(double t, t_ray *ray)
 	point.y = ray->origin.y + t * ray->dir.y;
 	point.z = ray->origin.z + t * ray->dir.z;
 	return (point);
+}
+
+t_vector	sphere_normal(t_vector point, t_sphere *sphere)
+{
+	t_vector	normal;
+	t_vector	aux;
+	double		len;
+
+	aux = sub_vec(point, sphere->pos);
+	len = vector_magnitude(aux);
+	if (len == 0)
+		return ((t_vector){1, 0, 0});
+	normal.x = aux.x / len;
+	normal.y = aux.y / len;
+	normal.z = aux.z / len;
+	return (normal);
+}
+
+t_vector	cylinder_normal(t_vector point, t_cylinder *cy)
+{
+	t_vector	normal;
+	double		y_top;
+	double		y_bottom;
+
+	y_top = cy->pos.y + (cy->height / 2);
+	y_bottom = cy->pos.y - (cy->height / 2);
+	if (fabs(point.y - y_top) < EPSILON)
+		return ((t_vector){0, 1, 0});
+	else if (fabs(point.y - y_bottom) < EPSILON)
+		return ((t_vector){0, -1, 0});
+	else if (y_bottom <= point.y && point.y <= y_top)
+	{
+		normal.x = point.x - cy->pos.x;
+		normal.y = 0;
+		normal.z = point.z - cy->pos.z;
+		vector_normalize(&normal);
+		return (normal);
+	}
+	return ((t_vector){0, 0, 0});
 }
