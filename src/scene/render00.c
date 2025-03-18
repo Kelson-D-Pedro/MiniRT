@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:36:09 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/17 13:59:17 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/18 13:34:26 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,27 @@ t_vector	cylinder_normal(t_vector point, t_cylinder *cy)
 		return (normal);
 	}
 	return ((t_vector){0, 0, 0});
+}
+
+void	put_map(t_scene *rt)
+{
+	int		x;
+	int		y;
+	t_ray	rays;
+	t_pair	pair;
+
+	x = 0;
+	while (x < WIDTH)
+	{
+		y = 0;
+		while (y < HEIGHT)
+		{
+			rays = send_rays(rt, x, y);
+			pair = which_sphere(rt, &rays);
+			printf("x: %f y: %f z: %f\n", rays.dir.x, rays.dir.y, rays.dir.z);
+			(void)pair;
+			y++;
+		}
+		x++;
+	}
 }

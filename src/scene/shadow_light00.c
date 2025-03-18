@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shadow00.c                                         :+:      :+:    :+:   */
+/*   shadow_light00.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:35:34 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/17 14:14:57 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/18 11:43:46 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/miniRT.h"
 
-int	dark_side(t_elements *rt, t_vector intersection, t_vector obj_normal)
+int	dark_side(t_scene *rt, t_vector intersection, t_vector obj_normal)
 {
 	t_ray		darksaber;
 	t_vector	light_dir;

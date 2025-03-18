@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:47:54 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/14 12:53:12 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/18 13:20:59 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 # define SCENE_H
 
 # include "vector.h"
+
+# define HEIGHT 1080
+# define WIDTH 1920
+# define M_PI1 3.1415
 
 //
 //-------------------------------STRUCTURES
@@ -101,7 +105,7 @@ typedef struct s_ray
 	t_vector			dir;
 }						t_ray;
 
-typedef struct s_elements
+typedef struct s_scene
 {
 	t_camera			camera;
 	t_ambient_light		ambiente_light;
@@ -111,12 +115,18 @@ typedef struct s_elements
 	t_plane				*plane;
 	t_num_of_elements	nb;
 	t_mlx				mini_lx;
+	t_vector			right_3d;
+	t_vector			up_3d;
+	double				viewport_height;
+	double				viewport_width;
 	char				**map;
-}						t_elements;
+}						t_scene;
 
 typedef struct s_pair
 {
 	int					index;
+	t_rgb_color			color;
+	t_vector			normal;
 	double				t;
 }						t_pair;
 
@@ -124,9 +134,9 @@ typedef struct s_pair
 //------------------------------- T_PAIR FUNCTIONS
 //
 
-t_pair					which_sphere(t_elements *rt, t_ray *ray);
-t_pair					which_plane(t_elements *rt, t_ray *ray);
-t_pair					which_cylinder(t_elements *rt, t_ray *ray);
+t_pair					which_sphere(t_scene *rt, t_ray *ray);
+t_pair					which_plane(t_scene *rt, t_ray *ray);
+t_pair					which_cylinder(t_scene *rt, t_ray *ray);
 
 //
 //------------------------------- T_VECTOR FUNCTIONS
@@ -134,6 +144,7 @@ t_pair					which_cylinder(t_elements *rt, t_ray *ray);
 
 t_vector				gen_point(double t, t_ray *ray);
 t_vector				sphere_normal(t_vector point, t_sphere *sphere);
+t_vector				cylinder_normal(t_vector point, t_cylinder *cy);
 
 //
 //------------------------------- T_AMBIENT_LIGHT FUNCTIONS
@@ -144,8 +155,10 @@ t_vector				sphere_normal(t_vector point, t_sphere *sphere);
 //
 
 //
-//------------------------------- T_PLANE FUNCTIONS
+//------------------------------- T_RAY FUNCTIONS
 //
+
+t_ray					send_rays(t_scene *rt, int x, int y);
 
 //
 //------------------------------- T_CYLINDER FUNCTIONS
@@ -155,6 +168,6 @@ t_vector				sphere_normal(t_vector point, t_sphere *sphere);
 //------------------------------- T_MLX FUNCTIONS
 //
 
-void					init_mlx_win(t_elements *rt);
+void					init_mlx_win(t_scene *rt);
 
 #endif

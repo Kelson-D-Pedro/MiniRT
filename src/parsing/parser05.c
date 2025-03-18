@@ -6,13 +6,13 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:48:59 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/13 11:51:18 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/18 11:42:37 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/miniRT.h"
 
-void	fill_light(t_elements *rt, char **mat)
+void	fill_light(t_scene *rt, char **mat)
 {
 	char	**vector;
 
@@ -29,7 +29,7 @@ void	fill_light(t_elements *rt, char **mat)
 	rt->light.brightness = ft_atod(mat[2], 1, 0, 0);
 }
 
-void	fill_sphere(t_elements *rt, char **mat)
+void	fill_sphere(t_scene *rt, char **mat)
 {
 	static int	i;
 	char		**vector;
@@ -50,7 +50,7 @@ void	fill_sphere(t_elements *rt, char **mat)
 	return ;
 }
 
-void	fill_plane(t_elements *rt, char **mat)
+void	fill_plane(t_scene *rt, char **mat)
 {
 	char		**vector;
 	static int	i;
@@ -74,7 +74,7 @@ void	fill_plane(t_elements *rt, char **mat)
 	return ;
 }
 
-void	fill_cylinder(t_elements *rt, char **mat)
+void	fill_cylinder(t_scene *rt, char **mat)
 {
 	char		**vector;
 	static int	i;
@@ -101,7 +101,7 @@ void	fill_cylinder(t_elements *rt, char **mat)
 	return ;
 }
 
-void	fill_elements(t_elements *rt)
+void	fill_elements(t_scene *rt)
 {
 	char	**mat;
 	int		i;
