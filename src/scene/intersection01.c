@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 18:04:59 by darwin            #+#    #+#             */
-/*   Updated: 2025/03/18 13:19:16 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/18 16:19:29 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,10 @@ t_pair	which_sphere(t_scene *rt, t_ray *ray)
 		pairs[i].index = i;
 		pairs[i].color = rt->sphere[i].color;
 		pairs[i].t = sphere_intersection(&rt->sphere[i], ray);
-		printf("%f\n", pairs[i].t);
 		i++;
 	}
 	i = 0;
-	closest = (t_pair){.index = -1, .color = {0, 0, 0}, .t = INFINITY};
+	closest = (t_pair){.index = -1, .color = {0, 0, 0}, .t = pairs[0].t};
 	while (i < (rt->nb.sphere))
 	{
 		if (pairs[i].t > EPSILON && pairs[i].t < closest.t)

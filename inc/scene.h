@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:47:54 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/18 13:20:59 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/18 14:25:56 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,5 +169,9 @@ t_ray					send_rays(t_scene *rt, int x, int y);
 //
 
 void					init_mlx_win(t_scene *rt);
+void					init_mlx_image(t_scene *rt);
+int						close_window(t_scene *rt);
+int						handle_keypress(int keycode, t_scene *rt);
+void					my_pixel_put(t_scene *rt, int x, int y, int color);
 
 #endif

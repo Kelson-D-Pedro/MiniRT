@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:33:52 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/18 12:39:08 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/22 08:11:25 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@ int	main(int argc, char *argv[])
 		return (1);
 	fill_elements(&rt);
 	init_3d_camera(&rt);
-	//init_mlx_win(&rt);
+	init_mlx_win(&rt);
+	init_mlx_image(&rt);
 	put_map(&rt);
-	//mlx_loop(rt.mini_lx.mlx);
+	mlx_put_image_to_window(rt.mini_lx.mlx, rt.mini_lx.win, rt.mini_lx.img, 0,
+		0);
+	mlx_loop(rt.mini_lx.mlx);
 	free_matrix((void **)rt.map);
 	return (0);
 }
