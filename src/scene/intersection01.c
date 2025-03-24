@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 18:04:59 by darwin            #+#    #+#             */
-/*   Updated: 2025/03/18 16:19:29 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/24 12:46:16 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,86 +58,65 @@ double	cylinder_cover_intersection(t_cylinder *cy, t_ray *ray)
 t_pair	which_sphere(t_scene *rt, t_ray *ray)
 {
 	int		i;
-	t_pair	*pairs;
 	t_pair	closest;
 
+	ft_bzero(&closest, sizeof(t_pair));
 	i = 0;
-	if (rt->nb.sphere <= 0)
-		return ((t_pair){.index = -1, .color = {0, 0, 0}, .t = -1});
-	pairs = malloc(sizeof(t_pair) * rt->nb.sphere);
 	while (i < rt->nb.sphere)
 	{
-		pairs[i].index = i;
-		pairs[i].color = rt->sphere[i].color;
-		pairs[i].t = sphere_intersection(&rt->sphere[i], ray);
+		if (sphere_intersection(&rt->sphere[i], ray) > 0)
+		{
+			closest.t = sphere_intersection(&rt->sphere[i], ray);
+			closest.normal = sphere_normal(gen_point(closest.t, ray),
+					&rt->sphere[i]);
+			closest.color = rt->sphere[i].color;
+			break ;
+		}
 		i++;
 	}
-	i = 0;
-	closest = (t_pair){.index = -1, .color = {0, 0, 0}, .t = pairs[0].t};
-	while (i < (rt->nb.sphere))
-	{
-		if (pairs[i].t > EPSILON && pairs[i].t < closest.t)
-			closest = pairs[i];
-		i++;
-	}
-	free(pairs);
 	return (closest);
 }
 
 t_pair	which_plane(t_scene *rt, t_ray *ray)
 {
 	int		i;
-	t_pair	*pairs;
 	t_pair	closest;
 
+	ft_bzero(&closest, sizeof(t_pair));
 	i = 0;
-	if (rt->nb.plane <= 0)
-		return ((t_pair){.index = -1, .color = {0, 0, 0}, .t = -1});
-	pairs = malloc(sizeof(t_pair) * rt->nb.plane);
 	while (i < rt->nb.plane)
 	{
-		pairs[i].index = i;
-		pairs[i].color = rt->plane[i].color;
-		pairs[i].t = plane_intersection(&rt->plane[i], ray);
+		if (plane_intersection(&rt->plane[i], ray) > 0)
+		{
+			closest.t = plane_intersection(&rt->plane[i], ray);
+			closest.normal = rt->plane->dir;
+			closest.color = rt->plane[i].color;
+			break ;
+		}
 		i++;
 	}
-	i = 0;
-	closest = (t_pair){.index = -1, .color = {0, 0, 0}, .t = INFINITY};
-	while (i < (rt->nb.plane))
-	{
-		if (pairs[i].t > EPSILON && pairs[i].t < closest.t)
-			closest = pairs[i];
-		i++;
-	}
-	free(pairs);
 	return (closest);
 }
 
 t_pair	which_cylinder(t_scene *rt, t_ray *ray)
 {
 	int		i;
-	t_pair	*pairs;
 	t_pair	closest;
 
+	ft_bzero(&closest, sizeof(t_pair));
 	i = 0;
-	if (rt->nb.cylinder <= 0)
-		return ((t_pair){.index = -1, .color = {0, 0, 0}, .t = -1});
-	pairs = malloc(sizeof(t_pair) * rt->nb.cylinder);
 	while (i < rt->nb.cylinder)
 	{
-		pairs[i].index = i;
-		pairs[i].color = rt->cylinder[i].color;
-		pairs[i].t = cylinder_intersection(&rt->cylinder[i], ray);
+		if (cylinder_intersection(&rt->cylinder[i], ray) > 0)
+		{
+			// printf("%f\n", cylinder_intersection(&rt->cylinder[i], ray));
+			closest.t = cylinder_intersection(&rt->cylinder[i], ray);
+			closest.normal = cylinder_normal(gen_point(closest.t, ray),
+					&rt->cylinder[i]);
+			closest.color = rt->cylinder[i].color;
+			break ;
+		}
 		i++;
 	}
-	i = 0;
-	closest = (t_pair){.index = -1, .color = {0, 0, 0}, .t = INFINITY};
-	while (i < (rt->nb.cylinder))
-	{
-		if (pairs[i].t > EPSILON && pairs[i].t < closest.t)
-			closest = pairs[i];
-		i++;
-	}
-	free(pairs);
 	return (closest);
 }

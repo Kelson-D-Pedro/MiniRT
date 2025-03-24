@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 15:31:46 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/13 12:05:11 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/24 12:44:42 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ double	validate_cylinder_sides_heigth(double t, t_cylinder *cy, t_ray *ray)
 	double		y_min;
 	double		y_max;
 
-	y_min = cy->dir.y;
+	y_min = cy->pos.y;
 	y_max = y_min + cy->height;
 	point.y = ray->origin.y + t * ray->dir.y;
 	if (y_min <= point.y && point.y <= y_max)
