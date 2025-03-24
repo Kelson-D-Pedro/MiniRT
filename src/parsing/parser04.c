@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 18:01:29 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/18 11:42:25 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/24 18:27:46 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void	fill_camera(t_scene *rt, char **mat)
 	rt->camera.dir.y = ft_atod(vector[1], 1, 0, 0);
 	rt->camera.dir.z = ft_atod(vector[2], 1, 0, 0);
 	free_matrix((void **)vector);
+	vector_normalize(&rt->camera.dir);
 	rt->camera.fov = ft_atod(mat[3], 1, 0, 0);
 	return ;
 }

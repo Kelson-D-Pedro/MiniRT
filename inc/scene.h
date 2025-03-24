@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:47:54 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/24 12:12:06 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/24 14:06:36 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,6 @@ typedef struct s_scene
 
 typedef struct s_pair
 {
-	int					index;
 	t_rgb_color			color;
 	t_vector			normal;
 	double				t;
@@ -137,6 +136,7 @@ typedef struct s_pair
 t_pair					which_sphere(t_scene *rt, t_ray *ray);
 t_pair					which_plane(t_scene *rt, t_ray *ray);
 t_pair					which_cylinder(t_scene *rt, t_ray *ray);
+t_pair					intersect_objs(t_scene *rt, t_ray *ray);
 
 //
 //------------------------------- T_VECTOR FUNCTIONS

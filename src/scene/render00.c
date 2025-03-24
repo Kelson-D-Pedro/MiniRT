@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:36:09 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/24 12:52:55 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/24 17:27:39 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,7 @@ void	put_map(t_scene *rt)
 	int		x;
 	int		y;
 	t_ray	rays;
-	t_pair	pair;
-	t_pair	one;
+	t_pair	objs;
 
 	x = 0;
 	while (x < WIDTH)
@@ -81,15 +80,9 @@ void	put_map(t_scene *rt)
 		while (y < HEIGHT)
 		{
 			rays = send_rays(rt, x, y);
-			pair = which_sphere(rt, &rays);
-			one = which_cylinder(rt, &rays);
-			if (one.t > 0)
-			{
-				my_pixel_put(rt, x, y, convert_color(one.color));
-				printf("%f\n", one.t);
-			}
-			else if (pair.t > 0)
-				my_pixel_put(rt, x, y, convert_color(pair.color));
+			objs = intersect_objs(rt, &rays);
+			if (objs.t > 0)
+				my_pixel_put(rt, x, y, convert_color(objs.color));
 			else
 				my_pixel_put(rt, x, y, 0x000000);
 			y++;

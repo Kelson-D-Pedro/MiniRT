@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 18:04:59 by darwin            #+#    #+#             */
-/*   Updated: 2025/03/24 12:46:16 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/24 17:13:34 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ double	cylinder_cover_intersection(t_cylinder *cy, t_ray *ray)
 	double	y_max;
 	double	t[2];
 
-	y_min = cy->pos.y;
-	y_max = y_min + cy->height;
+	/* y_min = cy->pos.y;
+	y_max = y_min + cy->height; */
+	y_min = cy->pos.y - (cy->height / 2);
+	y_max = cy->pos.y + (cy->height / 2);
 	if (ray->dir.y == 0)
 		return (-1);
 	t[0] = (y_min - ray->origin.y) / ray->dir.y;

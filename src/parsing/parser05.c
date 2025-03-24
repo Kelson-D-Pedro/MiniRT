@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:48:59 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/18 11:42:37 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/24 18:27:40 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	fill_plane(t_scene *rt, char **mat)
 	rt->plane[i].dir.y = ft_atod(vector[1], 1, 0, 0);
 	rt->plane[i].dir.z = ft_atod(vector[2], 1, 0, 0);
 	free_matrix((void **)vector);
+	vector_normalize(&rt->plane[i].dir);
 	vector = ft_split(mat[3], ',');
 	rt->plane[i].color.red = ft_atoi(vector[0]);
 	rt->plane[i].color.green = ft_atoi(vector[1]);
@@ -89,6 +90,7 @@ void	fill_cylinder(t_scene *rt, char **mat)
 	rt->cylinder[i].dir.y = ft_atod(vector[1], 1, 0, 0);
 	rt->cylinder[i].dir.z = ft_atod(vector[2], 1, 0, 0);
 	free_matrix((void **)vector);
+	vector_normalize(&rt->cylinder[i].dir);
 	vector = ft_split(mat[5], ',');
 	rt->cylinder[i].color.red = ft_atoi(vector[0]);
 	rt->cylinder[i].color.green = ft_atoi(vector[1]);
@@ -117,5 +119,5 @@ void	fill_elements(t_scene *rt)
 		free_matrix((void **)mat);
 		i++;
 	}
-	normalize(rt);
+	// normalize(rt);
 }
