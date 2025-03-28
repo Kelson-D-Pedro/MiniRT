@@ -6,13 +6,13 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:48:42 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/24 18:21:47 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/28 16:55:34 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/miniRT.h"
 
-/* t_ray	send_rays(t_scene *rt, int x, int y)
+t_ray	send_rays(t_scene *rt, int x, int y)
 {
 	t_ray		ray;
 	double		viewport_x;
@@ -32,11 +32,11 @@
 						viewport_x), scalar_mult(vertical, viewport_y))),
 			rt->camera.pos);
 	vector_normalize(&ray.dir);
-	ray.dir.z *= -0.4;
+	ray.dir.z *= -1;
 	return (ray);
-} */
+}
 
-t_ray send_rays(t_scene *rt, int x, int y)
+/*t_ray send_rays(t_scene *rt, int x, int y)
 {
 	t_ray		ray;
 	double		viewport_x;
@@ -69,4 +69,4 @@ t_ray send_rays(t_scene *rt, int x, int y)
 	ray.dir = sub_vec(point_on_viewport, ray.origin);
 	vector_normalize(&ray.dir);
 	return (ray);
-}
+}*/

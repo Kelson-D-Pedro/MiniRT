@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 18:04:59 by darwin            #+#    #+#             */
-/*   Updated: 2025/03/24 17:13:34 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/28 17:49:01 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ double	cylinder_cover_intersection(t_cylinder *cy, t_ray *ray)
 	double	y_max;
 	double	t[2];
 
-	/* y_min = cy->pos.y;
-	y_max = y_min + cy->height; */
 	y_min = cy->pos.y - (cy->height / 2);
 	y_max = cy->pos.y + (cy->height / 2);
 	if (ray->dir.y == 0)
@@ -111,7 +109,6 @@ t_pair	which_cylinder(t_scene *rt, t_ray *ray)
 	{
 		if (cylinder_intersection(&rt->cylinder[i], ray) > 0)
 		{
-			// printf("%f\n", cylinder_intersection(&rt->cylinder[i], ray));
 			closest.t = cylinder_intersection(&rt->cylinder[i], ray);
 			closest.normal = cylinder_normal(gen_point(closest.t, ray),
 					&rt->cylinder[i]);

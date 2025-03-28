@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:36:09 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/24 17:27:39 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/28 17:07:02 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	put_map(t_scene *rt)
 	int		y;
 	t_ray	rays;
 	t_pair	objs;
+	//t_rgb_color color;
 
 	x = 0;
 	while (x < WIDTH)

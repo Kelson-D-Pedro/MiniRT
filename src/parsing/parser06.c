@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:13:28 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/24 18:26:27 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/28 16:54:39 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	init_3d_camera(t_scene *rt)
 	world_up.z = 0;
 	rt->right_3d = vector_product(world_up, rt->camera.dir);
 	vector_normalize(&rt->right_3d);
-	rt->up_3d = vector_product(rt->right_3d, rt->camera.dir);
+	rt->up_3d = vector_product(rt->camera.dir, rt->right_3d);
 	aspect_ratio = (double)WIDTH / HEIGHT;
 	rt->viewport_height = 2.0 * tan((rt->camera.fov * M_PI1 / 180.0) / 2.0);
 	rt->viewport_width = aspect_ratio * rt->viewport_height;

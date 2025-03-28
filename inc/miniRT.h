@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:48:06 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/18 14:23:59 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/28 17:21:41 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int		verify_sphere(char **mat);
 int		verify_plane(char **mat);
 int		verify_cylinder(char **mat);
 int		its_alright_to_start(t_scene *rt, char **argv, int argc);
+int		is_on_dark_side(t_scene *rt, t_vector intersection,
+			t_vector obj_normal);
 
 //
 //------------------------------- DOUBLE FUNCTIONS

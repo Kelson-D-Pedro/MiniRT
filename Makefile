@@ -5,7 +5,8 @@ SRC		=	miniRT \
 			src/parsing/parser05 src/parsing/parser06 \
 			src/vectors/vectors00 src/vectors/vectors01 \
 			src/scene/mlx00 src/scene/intersection00 src/scene/intersection01 src/scene/intersection02 \
-			src/scene/rays00 src/scene/render00
+			src/scene/rays00 src/scene/render00 \
+			src/scene/shadow_light00 \
 
 SRCS	=	$(addsuffix .c, ${SRC})
 OBJS	=	$(SRCS:.c=.o)
