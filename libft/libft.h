@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 07:10:04 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/13 11:58:47 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/18 12:42:30 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@
 # include <fcntl.h>
 # include <limits.h>
 # include <math.h>
-# include <readline/history.h>
-# include <readline/readline.h>
 # include <signal.h>
 # include <stdarg.h>
 # include <stdio.h>

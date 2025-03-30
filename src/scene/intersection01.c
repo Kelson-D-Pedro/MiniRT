@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection01.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
+/*   By: darwin <darwin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 18:04:59 by darwin            #+#    #+#             */
-/*   Updated: 2025/03/13 12:41:02 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/30 21:11:23 by darwin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ double	cylinder_cover_intersection(t_cylinder *cy, t_ray *ray)
 	double	y_max;
 	double	t[2];
 
-	y_min = cy->pos.y;
-	y_max = y_min + cy->height;
+	y_min = cy->pos.y - (cy->height / 2);
+	y_max = cy->pos.y + (cy->height / 2);
 	if (ray->dir.y == 0)
 		return (-1);
 	t[0] = (y_min - ray->origin.y) / ray->dir.y;
@@ -55,83 +55,69 @@ double	cylinder_cover_intersection(t_cylinder *cy, t_ray *ray)
 	return (cover_intersection_aux(t, ray, cy));
 }
 
-t_pair	which_sphere(t_elements *rt, t_ray *ray)
+t_pair	which_sphere(t_scene *rt, t_ray *ray)
 {
 	int		i;
-	t_pair	*pairs;
 	t_pair	closest;
 
+	ft_bzero(&closest, sizeof(t_pair));
 	i = 0;
-	if (rt->nb.sphere <= 0)
-		return ((t_pair){-1, -1});
-	pairs = malloc(sizeof(t_pair) * rt->nb.sphere);
 	while (i < rt->nb.sphere)
 	{
-		pairs[i].index = i;
-		pairs[i].t = sphere_intersection(&rt->sphere[i++], ray);
-	}
-	i = 0;
-	closest = (t_pair){-1, INFINITY};
-	while (i < (rt->nb.sphere))
-	{
-		if (pairs[i].t > EPSILON && pairs[i].t < closest.t)
-			closest = pairs[i];
+		if (sphere_intersection(&rt->sphere[i], ray) > 0)
+		{
+			closest.t = sphere_intersection(&rt->sphere[i], ray);
+			closest.normal = sphere_normal(gen_point(closest.t, ray),
+					&rt->sphere[i]);
+			closest.color = rt->sphere[i].color;
+			break ;
+		}
 		i++;
 	}
-	free(pairs);
 	return (closest);
 }
 
-t_pair	which_plane(t_elements *rt, t_ray *ray)
+t_pair which_plane(t_scene *rt, t_ray *ray)
 {
-	int		i;
-	t_pair	*pairs;
-	t_pair	closest;
+    int     i;
+    t_pair  closest;
+    double  t;
 
-	i = 0;
-	if (rt->nb.plane <= 0)
-		return ((t_pair){-1, -1});
-	pairs = malloc(sizeof(t_pair) * rt->nb.plane);
-	while (i < rt->nb.plane)
-	{
-		pairs[i].index = i;
-		pairs[i].t = plane_intersection(&rt->plane[i++], ray);
-	}
-	i = 0;
-	closest = (t_pair){-1, INFINITY};
-	while (i < (rt->nb.plane))
-	{
-		if (pairs[i].t > EPSILON && pairs[i].t < closest.t)
-			closest = pairs[i];
-		i++;
-	}
-	free(pairs);
-	return (closest);
+    ft_bzero(&closest, sizeof(t_pair));
+    closest.t = INFINITY;
+    i = 0;
+    while (i < rt->nb.plane)
+    {
+        t = plane_intersection(&rt->plane[i], ray);
+        if (t > 0 && t < closest.t)
+        {
+            closest.t = t;
+            closest.normal = rt->plane[i].dir;
+            closest.color = rt->plane[i].color;
+        }
+        i++;
+    }
+    return (closest);
 }
 
-t_pair	which_cylinder(t_elements *rt, t_ray *ray)
+t_pair	which_cylinder(t_scene *rt, t_ray *ray)
 {
 	int		i;
-	t_pair	*pairs;
 	t_pair	closest;
 
+	ft_bzero(&closest, sizeof(t_pair));
 	i = 0;
-	if (rt->nb.cylinder <= 0)
-		return ((t_pair){-1, -1});
-	pairs = malloc(sizeof(t_pair) * rt->nb.cylinder);
 	while (i < rt->nb.cylinder)
 	{
-		pairs[i].index = i;
-		pairs[i].t = cylinder_intersection(&rt->cylinder[i++], ray);
-	}
-	i = 0;
-	closest = (t_pair){-1, INFINITY};
-	while (i < (rt->nb.cylinder))
-	{
-		if (pairs[i].t > EPSILON && pairs[i].t < closest.t)
-			closest = pairs[i];
+		if (cylinder_intersection(&rt->cylinder[i], ray) > 0)
+		{
+			closest.t = cylinder_intersection(&rt->cylinder[i], ray);
+			closest.normal = cylinder_normal(gen_point(closest.t, ray),
+					&rt->cylinder[i]);
+			closest.color = rt->cylinder[i].color;
+			break ;
+		}
 		i++;
 	}
-	free(pairs);
 	return (closest);
 }

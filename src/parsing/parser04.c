@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 18:01:29 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/13 11:49:55 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/24 18:27:46 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	verify_cylinder(char **mat)
 	return (i);
 }
 
-int	its_alright_to_start(t_elements *rt, char **argv, int argc)
+int	its_alright_to_start(t_scene *rt, char **argv, int argc)
 {
 	if (argc != 2)
 	{
@@ -72,7 +72,7 @@ int	its_alright_to_start(t_elements *rt, char **argv, int argc)
 	return (0);
 }
 
-void	fill_ambient_light(t_elements *rt, char **mat)
+void	fill_ambient_light(t_scene *rt, char **mat)
 {
 	char	**colors;
 
@@ -85,7 +85,7 @@ void	fill_ambient_light(t_elements *rt, char **mat)
 	return ;
 }
 
-void	fill_camera(t_elements *rt, char **mat)
+void	fill_camera(t_scene *rt, char **mat)
 {
 	char	**vector;
 
@@ -99,6 +99,7 @@ void	fill_camera(t_elements *rt, char **mat)
 	rt->camera.dir.y = ft_atod(vector[1], 1, 0, 0);
 	rt->camera.dir.z = ft_atod(vector[2], 1, 0, 0);
 	free_matrix((void **)vector);
+	vector_normalize(&rt->camera.dir);
 	rt->camera.fov = ft_atod(mat[3], 1, 0, 0);
 	return ;
 }

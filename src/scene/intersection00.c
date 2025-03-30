@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection00.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
+/*   By: darwin <darwin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 15:31:46 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/13 12:05:11 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/30 20:16:28 by darwin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ double	sphere_intersection(t_sphere *sphere, t_ray *ray)
 	return (-1);
 }
 
+
 double	plane_intersection(t_plane *plane, t_ray *ray)
 {
 	double	value1;
@@ -47,7 +48,7 @@ double	plane_intersection(t_plane *plane, t_ray *ray)
 	value1 = vector_dot(plane->dir, ray->dir);
 	if (value1 == 0)
 		return (-1);
-	value2 = vector_dot(plane->dir, sub_vec(plane->dir, ray->origin));
+	value2 = vector_dot(plane->dir, sub_vec(plane->pos, ray->origin));
 	t = value2 / value1;
 	if (t < 0)
 		return (-1);
@@ -89,8 +90,10 @@ double	validate_cylinder_sides_heigth(double t, t_cylinder *cy, t_ray *ray)
 	double		y_min;
 	double		y_max;
 
-	y_min = cy->dir.y;
-	y_max = y_min + cy->height;
+	if (t < 0)
+    	return (-1);
+	y_min = cy->pos.y - (cy->height / 2);
+	y_max = cy->pos.y + (cy->height / 2);
 	point.y = ray->origin.y + t * ray->dir.y;
 	if (y_min <= point.y && point.y <= y_max)
 		return (t);

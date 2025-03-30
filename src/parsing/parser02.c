@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 15:26:37 by kpedro            #+#    #+#             */
-/*   Updated: 2025/02/19 15:07:06 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/18 11:41:35 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	verify_normalized_vector(char *str)
 	return (0);
 }
 
-int	verify_rt_file(t_elements *rt)
+int	verify_rt_file(t_scene *rt)
 {
 	char	**mat;
 	int		j;

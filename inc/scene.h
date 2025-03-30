@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
+/*   By: darwin <darwin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:47:54 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/13 14:40:30 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/30 20:44:01 by darwin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 # define SCENE_H
 
 # include "vector.h"
+
+# define HEIGHT 1080
+# define WIDTH 1920
+# define M_PI1 3.1415
 
 //
 //-------------------------------STRUCTURES
@@ -101,7 +105,7 @@ typedef struct s_ray
 	t_vector			dir;
 }						t_ray;
 
-typedef struct s_elements
+typedef struct s_scene
 {
 	t_camera			camera;
 	t_ambient_light		ambiente_light;
@@ -111,40 +115,57 @@ typedef struct s_elements
 	t_plane				*plane;
 	t_num_of_elements	nb;
 	t_mlx				mini_lx;
+	t_vector			right_3d;
+	t_vector			up_3d;
+	t_vector			p_centro;
+	t_vector			p_first;
+	double				viewport_height;
+	double				viewport_width;
+	double				psizex;
+	double				psizey;
 	char				**map;
-}						t_elements;
+}						t_scene;
 
 typedef struct s_pair
 {
-	int					index;
+	t_rgb_color			color;
+	t_vector			normal;
 	double				t;
+	int					type;
 }						t_pair;
 
 //
 //------------------------------- T_PAIR FUNCTIONS
 //
 
-t_pair					which_sphere(t_elements *rt, t_ray *ray);
-t_pair					which_plane(t_elements *rt, t_ray *ray);
-t_pair					which_cylinder(t_elements *rt, t_ray *ray);
+t_pair					which_sphere(t_scene *rt, t_ray *ray);
+t_pair					which_plane(t_scene *rt, t_ray *ray);
+t_pair					which_cylinder(t_scene *rt, t_ray *ray);
+t_pair					intersect_objs(t_scene *rt, t_ray *ray);
 
 //
 //------------------------------- T_VECTOR FUNCTIONS
 //
 
 t_vector				gen_point(double t, t_ray *ray);
+t_vector				sphere_normal(t_vector point, t_sphere *sphere);
+t_vector				cylinder_normal(t_vector point, t_cylinder *cy);
 
 //
 //------------------------------- T_AMBIENT_LIGHT FUNCTIONS
 //
+
+t_rgb_color	force(t_scene *rt, t_ray *ray, t_pair *obj);
 
 //
 //------------------------------- T_SPHERE FUNCTIONS
 //
 
 //
-//------------------------------- T_PLANE FUNCTIONS
+//------------------------------- T_RAY FUNCTIONS
 //
+
+t_ray					send_rays(t_scene *rt, int x, int y);
 
 //
 //------------------------------- T_CYLINDER FUNCTIONS
@@ -154,6 +175,10 @@ t_vector				gen_point(double t, t_ray *ray);
 //------------------------------- T_MLX FUNCTIONS
 //
 
-void					init_mlx_win(t_elements *rt);
+void					init_mlx_win(t_scene *rt);
+void					init_mlx_image(t_scene *rt);
+int						close_window(t_scene *rt);
+int						handle_keypress(int keycode, t_scene *rt);
+void					my_pixel_put(t_scene *rt, int x, int y, int color);
 
 #endif

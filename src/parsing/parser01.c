@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:41:49 by kpedro            #+#    #+#             */
-/*   Updated: 2025/02/18 18:05:46 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/18 11:41:17 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	verify_others_elements(char *file_name)
 	return (0);
 }
 
-int	verify_file_stuffs(char *file_name, t_elements *rt)
+int	verify_file_stuffs(char *file_name, t_scene *rt)
 {
 	if (verify_cap_elements(rt) || verify_others_elements(file_name))
 	{

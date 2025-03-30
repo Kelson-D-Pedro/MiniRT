@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 17:49:21 by kpedro            #+#    #+#             */
-/*   Updated: 2025/02/18 18:26:18 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/18 11:41:08 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	verify_cap_elements01(t_num_of_elements *elements)
 	return (0);
 }
 
-int	verify_cap_elements(t_elements *rt)
+int	verify_cap_elements(t_scene *rt)
 {
 	int		i;
 	char	**mat;
