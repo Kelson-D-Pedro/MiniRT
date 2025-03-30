@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shadow_light00.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
+/*   By: darwin <darwin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:35:34 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/28 17:20:10 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/30 21:24:32 by darwin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,29 @@ int	is_on_dark_side(t_scene *rt, t_vector intersection, t_vector obj_normal)
 		return (1);
 	else
 		return (0);
+}
+
+t_rgb_color	force(t_scene *rt, t_ray *ray, t_pair *obj)
+{
+	t_rgb_color color;
+	t_vector light_dir;
+	t_vector	point;
+	double	angle;
+
+	color.red = rt->ambiente_light.intensity * obj->color.red;
+	color.green = rt->ambiente_light.intensity * obj->color.green;
+	color.blue = rt->ambiente_light.intensity * obj->color.blue;
+	point = gen_point(obj->t, ray);
+	if (is_on_dark_side(rt, point, obj->normal))
+		return (color);
+	light_dir =sub_vec(rt->light.pos, point);
+	vector_normalize(&light_dir);
+	angle = vector_dot(obj->normal ,light_dir);
+	if (angle > 0)
+	{
+		color.red += (rt->light.color.red * 0.09) * rt->light.brightness * angle;
+        color.green += (rt->light.color.green * 0.09)* rt->light.brightness * angle;
+        color.blue += (rt->light.color.blue * 0.09) * rt->light.brightness * angle;
+	}
+	return (color);
 }

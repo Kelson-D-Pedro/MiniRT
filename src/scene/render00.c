@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render00.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
+/*   By: darwin <darwin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:36:09 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/28 17:07:02 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/30 20:59:47 by darwin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,11 @@ t_vector	gen_point(double t, t_ray *ray)
 
 t_vector	sphere_normal(t_vector point, t_sphere *sphere)
 {
-	t_vector	normal;
 	t_vector	aux;
-	double		len;
 
 	aux = sub_vec(point, sphere->pos);
-	len = vector_magnitude(aux);
-	if (len == 0)
-		return ((t_vector){1, 0, 0});
-	normal.x = aux.x / len;
-	normal.y = aux.y / len;
-	normal.z = aux.z / len;
-	return (normal);
+	vector_normalize(&aux);
+	return (aux);
 }
 
 t_vector	cylinder_normal(t_vector point, t_cylinder *cy)
@@ -72,7 +65,6 @@ void	put_map(t_scene *rt)
 	int		y;
 	t_ray	rays;
 	t_pair	objs;
-	//t_rgb_color color;
 
 	x = 0;
 	while (x < WIDTH)
@@ -83,9 +75,9 @@ void	put_map(t_scene *rt)
 			rays = send_rays(rt, x, y);
 			objs = intersect_objs(rt, &rays);
 			if (objs.t > 0)
-				my_pixel_put(rt, x, y, convert_color(objs.color));
+				my_pixel_put(rt, x, y, convert_color(force(rt, &rays, &objs)));
 			else
-				my_pixel_put(rt, x, y, 0x000000);
+				my_pixel_put(rt, x, y, convert_color(rt->ambiente_light.color));
 			y++;
 		}
 		x++;

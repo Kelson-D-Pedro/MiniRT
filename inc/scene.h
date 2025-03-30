@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
+/*   By: darwin <darwin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:47:54 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/24 14:06:36 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/30 20:44:01 by darwin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,12 @@ typedef struct s_scene
 	t_mlx				mini_lx;
 	t_vector			right_3d;
 	t_vector			up_3d;
+	t_vector			p_centro;
+	t_vector			p_first;
 	double				viewport_height;
 	double				viewport_width;
+	double				psizex;
+	double				psizey;
 	char				**map;
 }						t_scene;
 
@@ -127,6 +131,7 @@ typedef struct s_pair
 	t_rgb_color			color;
 	t_vector			normal;
 	double				t;
+	int					type;
 }						t_pair;
 
 //
@@ -149,6 +154,8 @@ t_vector				cylinder_normal(t_vector point, t_cylinder *cy);
 //
 //------------------------------- T_AMBIENT_LIGHT FUNCTIONS
 //
+
+t_rgb_color	force(t_scene *rt, t_ray *ray, t_pair *obj);
 
 //
 //------------------------------- T_SPHERE FUNCTIONS

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection01.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
+/*   By: darwin <darwin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 18:04:59 by darwin            #+#    #+#             */
-/*   Updated: 2025/03/28 17:49:01 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/30 21:11:23 by darwin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,25 +77,27 @@ t_pair	which_sphere(t_scene *rt, t_ray *ray)
 	return (closest);
 }
 
-t_pair	which_plane(t_scene *rt, t_ray *ray)
+t_pair which_plane(t_scene *rt, t_ray *ray)
 {
-	int		i;
-	t_pair	closest;
+    int     i;
+    t_pair  closest;
+    double  t;
 
-	ft_bzero(&closest, sizeof(t_pair));
-	i = 0;
-	while (i < rt->nb.plane)
-	{
-		if (plane_intersection(&rt->plane[i], ray) > 0)
-		{
-			closest.t = plane_intersection(&rt->plane[i], ray);
-			closest.normal = rt->plane->dir;
-			closest.color = rt->plane[i].color;
-			break ;
-		}
-		i++;
-	}
-	return (closest);
+    ft_bzero(&closest, sizeof(t_pair));
+    closest.t = INFINITY;
+    i = 0;
+    while (i < rt->nb.plane)
+    {
+        t = plane_intersection(&rt->plane[i], ray);
+        if (t > 0 && t < closest.t)
+        {
+            closest.t = t;
+            closest.normal = rt->plane[i].dir;
+            closest.color = rt->plane[i].color;
+        }
+        i++;
+    }
+    return (closest);
 }
 
 t_pair	which_cylinder(t_scene *rt, t_ray *ray)

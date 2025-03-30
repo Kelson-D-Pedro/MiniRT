@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser06.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
+/*   By: darwin <darwin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:13:28 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/28 16:54:39 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/03/30 20:29:54 by darwin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,6 @@ void	choice_who_fill(t_scene *rt, char **mat)
 		fill_cylinder(rt, mat);
 }
 
-void	normalize(t_scene *rt)
-{
-	if (!is_normalized(rt->camera.dir))
-		vector_normalize(&rt->camera.dir);
-	if (rt->nb.cylinder)
-		if (!is_normalized(rt->cylinder->dir))
-			vector_normalize(&rt->cylinder->dir);
-	if (rt->nb.plane)
-		if (!is_normalized(rt->plane->dir))
-			vector_normalize(&rt->plane->dir);
-}
-
 void	init_3d_camera(t_scene *rt)
 {
 	t_vector	world_up;
@@ -51,7 +39,8 @@ void	init_3d_camera(t_scene *rt)
 	rt->right_3d = vector_product(world_up, rt->camera.dir);
 	vector_normalize(&rt->right_3d);
 	rt->up_3d = vector_product(rt->camera.dir, rt->right_3d);
+	vector_normalize(&rt->up_3d);
 	aspect_ratio = (double)WIDTH / HEIGHT;
-	rt->viewport_height = 2.0 * tan((rt->camera.fov * M_PI1 / 180.0) / 2.0);
+	rt->viewport_height = 2 * tan((rt->camera.fov * M_PI / 180.0) / 2);
 	rt->viewport_width = aspect_ratio * rt->viewport_height;
 }
