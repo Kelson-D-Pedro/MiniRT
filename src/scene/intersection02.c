@@ -12,12 +12,12 @@
 
 #include "../../inc/miniRT.h"
 
-t_pair	intersect_objs(t_scene *rt, t_ray *ray)
+t_pair intersect_objs(t_scene *rt, t_ray *ray)
 {
-	t_pair	closest;
-	t_pair	sp;
-	t_pair	cy;
-	t_pair	pl;
+	t_pair closest;
+	t_pair sp;
+	t_pair cy;
+	t_pair pl;
 
 	closest.t = -1;
 	sp = which_sphere(rt, ray);
@@ -26,11 +26,7 @@ t_pair	intersect_objs(t_scene *rt, t_ray *ray)
 	if (sp.t > 0 && (closest.t == -1 || sp.t < closest.t))
 		closest = sp;
 	if (pl.t > 0 && (closest.t == -1 || pl.t < closest.t))
-	{
 		closest = pl;
-		closest.type = 2;
-
-	}
 	if (cy.t > 0 && (closest.t == -1 || cy.t < closest.t))
 		closest = cy;
 	return (closest);

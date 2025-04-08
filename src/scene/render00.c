@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render00.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darwin <darwin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:36:09 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/30 20:59:47 by darwin           ###   ########.fr       */
+/*   Updated: 2025/04/02 15:29:40 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ void	put_map(t_scene *rt)
 			objs = intersect_objs(rt, &rays);
 			if (objs.t > 0)
 				my_pixel_put(rt, x, y, convert_color(force(rt, &rays, &objs)));
-			else
-				my_pixel_put(rt, x, y, convert_color(rt->ambiente_light.color));
 			y++;
 		}
 		x++;
