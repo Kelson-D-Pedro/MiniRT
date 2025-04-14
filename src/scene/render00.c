@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:36:09 by kpedro            #+#    #+#             */
-/*   Updated: 2025/04/02 15:29:40 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/14 15:30:02 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,28 +31,32 @@ t_vector	sphere_normal(t_vector point, t_sphere *sphere)
 	return (aux);
 }
 
+
 t_vector	cylinder_normal(t_vector point, t_cylinder *cy)
 {
+	t_vector	v;
+	t_vector	proj;
 	t_vector	normal;
-	double		y_top;
-	double		y_bottom;
+	double		proj_len;
 
-	y_top = cy->pos.y + (cy->height / 2);
-	y_bottom = cy->pos.y - (cy->height / 2);
-	if (fabs(point.y - y_top) < EPSILON)
-		return ((t_vector){0, 1, 0});
-	else if (fabs(point.y - y_bottom) < EPSILON)
-		return ((t_vector){0, -1, 0});
-	else if (y_bottom <= point.y && point.y <= y_top)
+	v = sub_vec(point, cy->pos);
+	proj_len = vector_dot(v, cy->dir);
+	if (fabs(proj_len - (cy->height / 2)) < EPSILON)
 	{
-		normal.x = point.x - cy->pos.x;
-		normal.y = 0;
-		normal.z = point.z - cy->pos.z;
-		vector_normalize(&normal);
-		return (normal);
+		if (vector_magnitude(sub_vec(point, add_vec(cy->pos, scalar_mult(cy->dir, proj_len)))) <= cy->radius)
+			return (cy->dir);
 	}
-	return ((t_vector){0, 0, 0});
+	if (fabs(proj_len + (cy->height / 2)) < EPSILON)
+	{
+		if (vector_magnitude(sub_vec(point, add_vec(cy->pos, scalar_mult(cy->dir, proj_len)))) <= cy->radius)
+			return (scalar_mult(cy->dir, -1));
+	}
+	proj = scalar_mult(cy->dir, proj_len);
+	normal = sub_vec(v, proj);
+	vector_normalize(&normal);
+	return (normal);
 }
+
 
 static int	convert_color(t_rgb_color color)
 {

@@ -3,78 +3,76 @@
 /*                                                        :::      ::::::::   */
 /*   intersection01.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darwin <darwin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 18:04:59 by darwin            #+#    #+#             */
-/*   Updated: 2025/03/30 21:11:23 by darwin           ###   ########.fr       */
+/*   Updated: 2025/04/14 16:45:19 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/miniRT.h"
 
-static double	cover_intersection_aux(double *t, t_ray *ray, t_cylinder *cy)
+static double	cover_intersection_aux(double *t, t_ray *ray, t_cylinder *cy, t_vector *covers)
 {
-	int		i;
-	double	value;
-	double	aux;
-	double	x;
-	double	z;
+    t_vector    point;
+	int         i;
+    double      t_min;
+	double      dist;
 
 	i = 0;
-	value = 0;
-	aux = -1;
+    t_min = -1;
 	while (i < 2)
 	{
-		if (t[i] > 0)
+		if (t[i] > EPSILON)
 		{
-			x = ray->origin.x + t[i] * ray->dir.x;
-			z = ray->origin.z + t[i] * ray->dir.z;
-			value = ((x - cy->pos.x) * (x - cy->pos.x)) + ((z - cy->pos.z) * (z
-						- cy->pos.z));
-			if (value <= cy->radius * cy->radius)
-				if (aux == -1 || t[i] < aux)
-					aux = t[i];
+            point = gen_point(t[i], ray);
+            dist = vector_magnitude(sub_vec(point, covers[i]));
+            if (dist <= cy->radius)
+            {
+                if (t_min < 0 || t[i] < t_min)
+                    t_min = t[i];
+            }
 		}
 		i++;
 	}
-	return (aux);
+    return (t_min);
 }
 
 double	cylinder_cover_intersection(t_cylinder *cy, t_ray *ray)
 {
-	double	y_min;
-	double	y_max;
+	t_vector    covers[2];
 	double	t[2];
-
-	y_min = cy->pos.y - (cy->height / 2);
-	y_max = cy->pos.y + (cy->height / 2);
-	if (ray->dir.y == 0)
+    
+	if (fabs(vector_dot(ray->dir, cy->dir)) < EPSILON)
 		return (-1);
-	t[0] = (y_min - ray->origin.y) / ray->dir.y;
-	t[1] = (y_max - ray->origin.y) / ray->dir.y;
-	return (cover_intersection_aux(t, ray, cy));
+	covers[0] = add_vec(cy->pos, scalar_mult(cy->dir, cy->height / 2));
+    covers[1] = sub_vec(cy->pos, scalar_mult(cy->dir, cy->height / 2));
+	t[0] = vector_dot(sub_vec(covers[0], ray->origin), cy->dir) / vector_dot(ray->dir, cy->dir);
+	t[1] = vector_dot(sub_vec(covers[1], ray->origin), cy->dir) / vector_dot(ray->dir, cy->dir);
+	return (cover_intersection_aux(t, ray, cy, covers));
 }
 
-t_pair	which_sphere(t_scene *rt, t_ray *ray)
+t_pair which_sphere(t_scene *rt, t_ray *ray)
 {
-	int		i;
-	t_pair	closest;
+    int     i;
+    t_pair  closest;
+    double  t;
 
-	ft_bzero(&closest, sizeof(t_pair));
-	i = 0;
-	while (i < rt->nb.sphere)
-	{
-		if (sphere_intersection(&rt->sphere[i], ray) > 0)
-		{
-			closest.t = sphere_intersection(&rt->sphere[i], ray);
-			closest.normal = sphere_normal(gen_point(closest.t, ray),
-					&rt->sphere[i]);
-			closest.color = rt->sphere[i].color;
-			break ;
-		}
-		i++;
-	}
-	return (closest);
+    ft_bzero(&closest, sizeof(t_pair));
+    closest.t = INFINITY;
+    i = 0;
+    while (i < rt->nb.sphere)
+    {
+        t = sphere_intersection(&rt->sphere[i], ray);
+        if (t > 0 && t < closest.t)
+        {
+            closest.t = t;
+            closest.normal = sphere_normal(gen_point(t, ray), &rt->sphere[i]);
+            closest.color = rt->sphere[i].color;
+        }
+        i++;
+    }
+    return (closest);
 }
 
 t_pair which_plane(t_scene *rt, t_ray *ray)
@@ -100,24 +98,25 @@ t_pair which_plane(t_scene *rt, t_ray *ray)
     return (closest);
 }
 
-t_pair	which_cylinder(t_scene *rt, t_ray *ray)
+t_pair which_cylinder(t_scene *rt, t_ray *ray)
 {
-	int		i;
-	t_pair	closest;
+    int     i;
+    t_pair  closest;
+    double  t;
 
-	ft_bzero(&closest, sizeof(t_pair));
-	i = 0;
-	while (i < rt->nb.cylinder)
-	{
-		if (cylinder_intersection(&rt->cylinder[i], ray) > 0)
-		{
-			closest.t = cylinder_intersection(&rt->cylinder[i], ray);
-			closest.normal = cylinder_normal(gen_point(closest.t, ray),
-					&rt->cylinder[i]);
-			closest.color = rt->cylinder[i].color;
-			break ;
-		}
-		i++;
-	}
-	return (closest);
+    ft_bzero(&closest, sizeof(t_pair));
+    closest.t = INFINITY;
+    i = 0;
+    while (i < rt->nb.cylinder)
+    {
+        t = cylinder_intersection(&rt->cylinder[i], ray);
+        if (t > 0 && t < closest.t)
+        {
+            closest.t = t;
+            closest.normal = cylinder_normal(gen_point(t, ray), &rt->cylinder[i]);
+            closest.color = rt->cylinder[i].color;
+        }
+        i++;
+    }
+    return (closest);
 }
