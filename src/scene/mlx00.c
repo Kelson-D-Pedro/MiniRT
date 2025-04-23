@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:35:47 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/24 11:02:58 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/22 17:46:56 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	init_mlx_win(t_scene *rt)
 		free(rt->mini_lx.mlx);
 		exit(1);
 	}
-	mlx_hook(rt->mini_lx.win, 17, 0, close_window, rt);
-	mlx_key_hook(rt->mini_lx.win, handle_keypress, rt);
+	/* mlx_hook(rt->mini_lx.win, 17, 0, close_window, rt);
+	mlx_key_hook(rt->mini_lx.win, handle_keypress, rt); */
 }
 
 void	init_mlx_image(t_scene *rt)
@@ -58,7 +58,7 @@ int	close_window(t_scene *rt)
 
 int	handle_keypress(int keycode, t_scene *rt)
 {
-	if (keycode == 65307)
+	if (keycode == XK_Escape)
 		close_window(rt);
 	return (0);
 }

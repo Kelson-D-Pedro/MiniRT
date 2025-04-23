@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser05.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darwin <darwin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:48:59 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/30 20:28:08 by darwin           ###   ########.fr       */
+/*   Updated: 2025/04/22 10:43:29 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	fill_sphere(t_scene *rt, char **mat)
 	free_matrix((void **)vector);
 	rt->sphere[i].diameter = ft_atod(mat[2], 1, 0, 0);
 	rt->sphere[i].radius = rt->sphere[i].diameter / 2;
+	rt->sphere[i].active = 0;
 	i++;
 	return ;
 }
@@ -71,6 +72,7 @@ void	fill_plane(t_scene *rt, char **mat)
 	rt->plane[i].color.green = ft_atoi(vector[1]);
 	rt->plane[i].color.blue = ft_atoi(vector[2]);
 	free_matrix((void **)vector);
+	rt->plane[i].active = 0;
 	i++;
 	return ;
 }
@@ -99,6 +101,7 @@ void	fill_cylinder(t_scene *rt, char **mat)
 	rt->cylinder[i].diameter = ft_atod(mat[3], 1, 0, 0);
 	rt->cylinder[i].height = ft_atod(mat[4], 1, 0, 0);
 	rt->cylinder[i].radius = rt->cylinder[i].diameter / 2;
+	rt->cylinder[i].active = 0;
 	i++;
 	return ;
 }
@@ -119,5 +122,4 @@ void	fill_elements(t_scene *rt)
 		free_matrix((void **)mat);
 		i++;
 	}
-	// normalize(rt);
 }

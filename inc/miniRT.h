@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:48:06 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/28 17:21:41 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/22 10:43:19 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../libft/libft.h"
 # include "../minilibx/mlx.h"
+# include <X11/keysym.h>
 # include "scene.h"
 # include "vector.h"
 
@@ -24,7 +25,7 @@
 
 int		verify_file_extension(char *file_name);
 int		verify_cap_elements(t_scene *rt);
-int		verify_others_elements(char *file_name);
+int		verify_others_elements(t_scene *rt);
 int		verify_file_stuffs(char *file_name, t_scene *rt);
 int		verify_color(char *str1, int i);
 int		verify_vector_values(char *str);
@@ -65,7 +66,6 @@ void	fill_plane(t_scene *rt, char **mat);
 void	fill_cylinder(t_scene *rt, char **mat);
 void	fill_elements(t_scene *rt);
 void	choice_who_fill(t_scene *rt, char **mat);
-void	normalize(t_scene *rt);
 void	put_map(t_scene *rt);
 void	init_3d_camera(t_scene *rt);
 

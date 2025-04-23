@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darwin <darwin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:47:54 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/30 20:44:01 by darwin           ###   ########.fr       */
+/*   Updated: 2025/04/22 17:46:47 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,27 +53,30 @@ typedef struct s_light
 
 typedef struct s_sphere
 {
-	t_vector pos;
-	double diameter;
-	double radius;
-	t_rgb_color color;
+	t_vector	pos;
+	double		diameter;
+	double		radius;
+	t_rgb_color	color;
+	int			active;
 } t_sphere;
 
 typedef struct s_plane
 {
-	t_vector pos;
-	t_vector dir;
-	t_rgb_color color;
+	t_vector	pos;
+	t_vector	dir;
+	t_rgb_color	color;
+	int			active;
 } t_plane;
 
 typedef struct s_cylinder
 {
-	t_vector pos;
-	t_vector dir;
-	double height;
-	double diameter;
-	double radius;
-	t_rgb_color color;
+	t_vector	pos;
+	t_vector	dir;
+	double		height;
+	double		diameter;
+	double		radius;
+	t_rgb_color	color;
+	int			active;
 } t_cylinder;
 
 typedef struct s_num_of_elements
@@ -117,20 +120,18 @@ typedef struct s_scene
 	t_mlx mini_lx;
 	t_vector right_3d;
 	t_vector up_3d;
-	t_vector p_centro;
-	t_vector p_first;
 	double viewport_height;
 	double viewport_width;
-	double psizex;
-	double psizey;
 	char **map;
 } t_scene;
 
 typedef struct s_pair
 {
-	t_rgb_color color;
-	t_vector normal;
-	double t;
+	t_rgb_color	color;
+	t_vector	normal;
+	double		t;
+	int			index;
+	char		type;
 } t_pair;
 
 //
@@ -174,10 +175,13 @@ t_ray send_rays(t_scene *rt, int x, int y);
 //------------------------------- T_MLX FUNCTIONS
 //
 
-void init_mlx_win(t_scene *rt);
-void init_mlx_image(t_scene *rt);
-int close_window(t_scene *rt);
-int handle_keypress(int keycode, t_scene *rt);
-void my_pixel_put(t_scene *rt, int x, int y, int color);
+void	init_mlx_win(t_scene *rt);
+void	init_mlx_image(t_scene *rt);
+void	my_pixel_put(t_scene *rt, int x, int y, int color);
+int		select_obj(int key, int x, int y, void *arg);
+int     make_moves(int key, t_scene *rt);
+int     hooks(int key, void *arg);
+int		close_window(t_scene *rt);
+int		handle_keypress(int keycode, t_scene *rt);
 
 #endif

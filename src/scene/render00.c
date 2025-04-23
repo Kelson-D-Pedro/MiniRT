@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:36:09 by kpedro            #+#    #+#             */
-/*   Updated: 2025/04/14 15:30:02 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/16 08:48:27 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,9 @@ t_vector	cylinder_normal(t_vector point, t_cylinder *cy)
 	v = sub_vec(point, cy->pos);
 	proj_len = vector_dot(v, cy->dir);
 	if (fabs(proj_len - (cy->height / 2)) < EPSILON)
-	{
-		if (vector_magnitude(sub_vec(point, add_vec(cy->pos, scalar_mult(cy->dir, proj_len)))) <= cy->radius)
-			return (cy->dir);
-	}
+		return (cy->dir);
 	if (fabs(proj_len + (cy->height / 2)) < EPSILON)
-	{
-		if (vector_magnitude(sub_vec(point, add_vec(cy->pos, scalar_mult(cy->dir, proj_len)))) <= cy->radius)
-			return (scalar_mult(cy->dir, -1));
-	}
+		return (scalar_mult(cy->dir, -1));
 	proj = scalar_mult(cy->dir, proj_len);
 	normal = sub_vec(v, proj);
 	vector_normalize(&normal);

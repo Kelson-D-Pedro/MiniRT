@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 17:49:21 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/18 11:41:08 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/21 20:01:09 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ void	get_elements_quantity(t_num_of_elements *element, char *str)
 		element->camera++;
 	else if (ft_strncmp(str, "L", 1) == 0)
 		element->light++;
-	else if (ft_strncmp(str, "sp", 1) == 0)
+	else if (ft_strncmp(str, "sp", 2) == 0)
 		element->sphere++;
-	else if (ft_strncmp(str, "pl", 1) == 0)
+	else if (ft_strncmp(str, "pl", 2) == 0)
 		element->plane++;
-	else if (ft_strncmp(str, "cy", 1) == 0)
+	else if (ft_strncmp(str, "cy", 2) == 0)
 		element->cylinder++;
 }
 

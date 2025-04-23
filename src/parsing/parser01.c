@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:41:49 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/18 11:41:17 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/21 20:28:47 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,53 +14,45 @@
 
 static int	verify_others(char *str)
 {
-	if (ft_strncmp(str, "A", 1))
+	if (ft_strncmp(str, "A", 1) == 0)
 		return (1);
-	else if (ft_strncmp(str, "C", 1))
+	else if (ft_strncmp(str, "C", 1) == 0)
 		return (1);
-	else if (ft_strncmp(str, "L", 1))
+	else if (ft_strncmp(str, "L", 1) == 0)
 		return (1);
-	else if (ft_strncmp(str, "sp", 1))
+	else if (ft_strncmp(str, "sp", 2) == 0)
 		return (1);
-	else if (ft_strncmp(str, "pl", 1))
+	else if (ft_strncmp(str, "pl", 2) == 0)
 		return (1);
-	else if (ft_strncmp(str, "cy", 1))
+	else if (ft_strncmp(str, "cy", 2) == 0)
 		return (1);
 	return (0);
 }
 
-int	verify_others_elements(char *file_name)
+int	verify_others_elements(t_scene *rt)
 {
 	char	**mat;
-	char	*line;
-	int		fd;
+	int		i;
 
-	fd = open(file_name, O_RDONLY);
-	line = get_next_line(fd);
-	while (line)
+	i = 0;
+	while (rt->map[i])
 	{
-		mat = ft_split_exp(line, ' ');
-		if (!mat[0])
+		mat = ft_split(rt->map[i], ' ');
+		if (!verify_others(mat[0]))
 		{
-			if (verify_others(mat[0]))
-			{
-				free_matrix((void **)mat);
-				free(line);
-				close(fd);
-				return (1);
-			}
+			free_matrix((void **)mat);
+			free_matrix((void **)rt->map);
+			return (1);
 		}
 		free_matrix((void **)mat);
-		free(line);
-		line = get_next_line(fd);
+		i++;
 	}
-	close(fd);
 	return (0);
 }
 
 int	verify_file_stuffs(char *file_name, t_scene *rt)
 {
-	if (verify_cap_elements(rt) || verify_others_elements(file_name))
+	if (verify_cap_elements(rt) || verify_others_elements(rt))
 	{
 		ft_putstr_fd("ERROR: Missing/Too Much Elements\n", 2);
 		return (1);

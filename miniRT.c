@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darwin <darwin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:33:52 by kpedro            #+#    #+#             */
-/*   Updated: 2025/03/30 19:16:05 by darwin           ###   ########.fr       */
+/*   Updated: 2025/04/22 20:24:07 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ int	main(int argc, char *argv[])
 	put_map(&rt);
 	mlx_put_image_to_window(rt.mini_lx.mlx, rt.mini_lx.win, rt.mini_lx.img, 0,
 		0);
+	mlx_mouse_hook(rt.mini_lx.win, select_obj, &rt);
+	mlx_key_hook(rt.mini_lx.win, hooks, &rt);
+	mlx_hook(rt.mini_lx.win, 17, 0, close_window, &rt);
 	mlx_loop(rt.mini_lx.mlx);
 	free_matrix((void **)rt.map);
 	return (0);
