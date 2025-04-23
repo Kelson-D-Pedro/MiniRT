@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:47:54 by kpedro            #+#    #+#             */
-/*   Updated: 2025/04/22 17:46:47 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/23 18:31:07 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,13 @@ typedef struct s_pair
 	char		type;
 } t_pair;
 
+typedef	struct s_aabb
+{
+	t_vector	max;
+	t_vector	min;
+}	t_aabb;
+
+
 //
 //------------------------------- T_PAIR FUNCTIONS
 //
@@ -160,6 +167,11 @@ t_rgb_color force(t_scene *rt, t_ray *ray, t_pair *obj);
 //
 //------------------------------- T_SPHERE FUNCTIONS
 //
+
+t_aabb  sphere_box(t_sphere *sp);
+t_aabb  cylinder_box(t_cylinder *cy);
+int intersect_box(t_aabb box, t_ray *ray);
+
 
 //
 //------------------------------- T_RAY FUNCTIONS

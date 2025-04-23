@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 18:04:59 by darwin            #+#    #+#             */
-/*   Updated: 2025/04/16 08:45:10 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/23 18:31:28 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,17 @@ t_pair which_sphere(t_scene *rt, t_ray *ray)
     i = 0;
     while (i < rt->nb.sphere)
     {
-        t = sphere_intersection(&rt->sphere[i], ray);
-        if (t > 0 && t < closest.t)
+        if (intersect_box(sphere_box(&rt->sphere[i]), ray))
         {
-            closest.t = t;
-            closest.normal = sphere_normal(gen_point(t, ray), &rt->sphere[i]);
-            closest.color = rt->sphere[i].color;
-            closest.index = i;
-            closest.type = 's';
+            t = sphere_intersection(&rt->sphere[i], ray);
+            if (t > 0 && t < closest.t)
+            {
+                closest.t = t;
+                closest.color = rt->sphere[i].color;
+                closest.index = i;
+                closest.normal = sphere_normal(gen_point(t, ray), &rt->sphere[i]);
+                closest.type = 's';
+            }
         }
         i++;
     }
@@ -92,9 +95,9 @@ t_pair which_plane(t_scene *rt, t_ray *ray)
         if (t > 0 && t < closest.t)
         {
             closest.t = t;
-            closest.normal = rt->plane[i].dir;
             closest.color = rt->plane[i].color;
             closest.index = i;
+            closest.normal = rt->plane[closest.index].dir;
             closest.type = 'p';
         }
         i++;
@@ -113,16 +116,19 @@ t_pair which_cylinder(t_scene *rt, t_ray *ray)
     i = 0;
     while (i < rt->nb.cylinder)
     {
-        t = cylinder_intersection(&rt->cylinder[i], ray);
-        if (t > 0 && t < closest.t)
-        {
-            closest.t = t;
-            closest.normal = cylinder_normal(gen_point(t, ray), &rt->cylinder[i]);
-            closest.color = rt->cylinder[i].color;
-            closest.index = i;
-            closest.type = 'c';
+        if (intersect_box(cylinder_box(&rt->cylinder[i]), ray))
+        {  
+            t = cylinder_intersection(&rt->cylinder[i], ray);
+            if (t > 0 && t < closest.t)
+            {
+                closest.t = t;
+                closest.color = rt->cylinder[i].color;
+                closest.index = i;
+                closest.normal = cylinder_normal(gen_point(t, ray), &rt->cylinder[i]);
+                closest.type = 'c';
+            }
         }
-        i++;
+            i++;
     }
     return (closest);
 }
