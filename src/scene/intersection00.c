@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 15:31:46 by kpedro            #+#    #+#             */
-/*   Updated: 2025/04/23 16:39:49 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/24 16:48:48 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ double	sphere_intersection(t_sphere *sphere, t_ray *ray)
 	return (-1);
 }
 
-
 double	plane_intersection(t_plane *plane, t_ray *ray)
 {
 	double	value1;
@@ -64,12 +63,13 @@ static int	solve_quad_eq(t_ray *ray, t_cylinder *cy, double roots[2])
 	t_vector	m;
 
 	m = sub_vec(ray->origin, cy->pos);
-	perp_d = sub_vec(ray->dir, scalar_mult(cy->dir, vector_dot(ray->dir, cy->dir)));
+	perp_d = sub_vec(ray->dir, scalar_mult(cy->dir, vector_dot(ray->dir,
+					cy->dir)));
 	perp_m = sub_vec(m, scalar_mult(cy->dir, vector_dot(m, cy->dir)));
 	factors[0] = vector_dot(perp_d, perp_d);
 	factors[1] = 2 * vector_dot(perp_m, perp_d);
 	factors[2] = vector_dot(perp_m, perp_m) - (cy->radius * cy->radius);
- 	delta = (factors[1] * factors[1]) - (4 * factors[0] * factors[2]);
+	delta = (factors[1] * factors[1]) - (4 * factors[0] * factors[2]);
 	if (delta < 0 || factors[0] == 0)
 		return (0);
 	roots[0] = (-factors[1] + sqrt(delta)) / (2 * factors[0]);
@@ -98,7 +98,7 @@ double	validate_cylinder_sides_heigth(double t, t_cylinder *cy, t_ray *ray)
 	double		proj_len;
 
 	if (t < 0)
-    	return (-1);
+		return (-1);
 	point = gen_point(t, ray);
 	proj_len = vector_dot(sub_vec(point, cy->pos), cy->dir);
 	if (proj_len >= -cy->height / 2 && proj_len <= cy->height / 2)

@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:35:47 by kpedro            #+#    #+#             */
-/*   Updated: 2025/04/24 11:41:07 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/24 16:49:06 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	init_mlx_win(t_scene *rt)
 	rt->mini_lx.mlx = mlx_init();
 	if (!rt->mini_lx.mlx)
 		exit(1);
-	rt->mini_lx.win = mlx_new_window(rt->mini_lx.mlx, 1920, 1080, "C DE CUCESSO");
+	rt->mini_lx.win = mlx_new_window(rt->mini_lx.mlx, 1920, 1080,
+			"C DE CUCESSO");
 	if (!rt->mini_lx.win)
 	{
 		mlx_destroy_display(rt->mini_lx.mlx);

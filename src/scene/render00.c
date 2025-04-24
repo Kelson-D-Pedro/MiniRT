@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:36:09 by kpedro            #+#    #+#             */
-/*   Updated: 2025/04/24 12:59:00 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/24 17:01:31 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ t_vector	sphere_normal(t_vector point, t_sphere *sphere)
 	return (aux);
 }
 
-
 t_vector	cylinder_normal(t_vector point, t_cylinder *cy)
 {
 	t_vector	v;
@@ -50,7 +49,6 @@ t_vector	cylinder_normal(t_vector point, t_cylinder *cy)
 	vector_normalize(&normal);
 	return (normal);
 }
-
 
 static int	convert_color(t_rgb_color color)
 {
@@ -74,6 +72,7 @@ void	put_map(t_scene *rt)
 			rays = send_rays(rt, x, y);
 			objs = intersect_objs(rt, &rays);
 			if (objs.t > 0)
+				//my_pixel_put(rt, x, y, convert_color(objs.color));
 				my_pixel_put(rt, x, y, convert_color(force(rt, &rays, &objs)));
 			y++;
 		}

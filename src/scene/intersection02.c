@@ -6,18 +6,18 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 13:54:47 by kpedro            #+#    #+#             */
-/*   Updated: 2025/04/23 10:02:04 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/24 16:48:56 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/miniRT.h"
 
-t_pair intersect_objs(t_scene *rt, t_ray *ray)
+t_pair	intersect_objs(t_scene *rt, t_ray *ray)
 {
-	t_pair closest;
-	t_pair sp;
-	t_pair cy;
-	t_pair pl;
+	t_pair	closest;
+	t_pair	sp;
+	t_pair	cy;
+	t_pair	pl;
 
 	closest.t = -1;
 	sp = which_sphere(rt, ray);
