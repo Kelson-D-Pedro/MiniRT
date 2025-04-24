@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:47:54 by kpedro            #+#    #+#             */
-/*   Updated: 2025/04/23 18:31:07 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/24 12:13:47 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@
 
 typedef struct s_rgb_color
 {
-	int red;
-	int green;
-	int blue;
+	int	red;
+	int	green;
+	int	blue;
 } t_rgb_color;
 
 typedef struct s_ambient_light
 {
-	double intensity;
-	t_rgb_color color;
+	double		intensity;
+	t_rgb_color	color;
 
 } t_ambient_light;
 
@@ -57,7 +57,6 @@ typedef struct s_sphere
 	double		diameter;
 	double		radius;
 	t_rgb_color	color;
-	int			active;
 } t_sphere;
 
 typedef struct s_plane
@@ -65,7 +64,6 @@ typedef struct s_plane
 	t_vector	pos;
 	t_vector	dir;
 	t_rgb_color	color;
-	int			active;
 } t_plane;
 
 typedef struct s_cylinder
@@ -76,7 +74,6 @@ typedef struct s_cylinder
 	double		diameter;
 	double		radius;
 	t_rgb_color	color;
-	int			active;
 } t_cylinder;
 
 typedef struct s_num_of_elements
@@ -108,6 +105,21 @@ typedef struct s_ray
 	t_vector dir;
 } t_ray;
 
+typedef struct s_pair
+{
+	t_rgb_color	color;
+	t_vector	normal;
+	double		t;
+	int			index;
+	char		type;
+} t_pair;
+
+typedef	struct s_aabb
+{
+	t_vector	max;
+	t_vector	min;
+}	t_aabb;
+
 typedef struct s_scene
 {
 	t_camera camera;
@@ -123,22 +135,9 @@ typedef struct s_scene
 	double viewport_height;
 	double viewport_width;
 	char **map;
+	t_pair	active_obj;
 } t_scene;
 
-typedef struct s_pair
-{
-	t_rgb_color	color;
-	t_vector	normal;
-	double		t;
-	int			index;
-	char		type;
-} t_pair;
-
-typedef	struct s_aabb
-{
-	t_vector	max;
-	t_vector	min;
-}	t_aabb;
 
 
 //
