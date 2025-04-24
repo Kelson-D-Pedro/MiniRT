@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:47:54 by kpedro            #+#    #+#             */
-/*   Updated: 2025/04/24 12:13:47 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/24 14:50:10 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,7 @@ void	init_mlx_win(t_scene *rt);
 void	init_mlx_image(t_scene *rt);
 void	my_pixel_put(t_scene *rt, int x, int y, int color);
 int		select_obj(int key, int x, int y, void *arg);
-int     make_moves(int key, t_scene *rt);
+int     make_moves(int key, t_vector *pos, t_scene *rt);
 int     hooks(int key, void *arg);
 int		close_window(t_scene *rt);
 int		handle_keypress(int keycode, t_scene *rt);

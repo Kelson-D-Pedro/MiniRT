@@ -6,13 +6,13 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 12:24:28 by kpedro            #+#    #+#             */
-/*   Updated: 2025/04/24 13:08:20 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/24 14:51:54 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/miniRT.h"
 
-static void set_active_obj(t_scene *rt, t_pair *obj, char type)
+void set_active_obj(t_scene *rt, t_pair *obj, char type)
 {
     if (obj == NULL)
     {
@@ -41,8 +41,10 @@ int    select_obj(int key, int x, int y, void *arg)
             set_active_obj(rt, &obj, 'p');
         else if (obj.type == 'c')
             set_active_obj(rt, &obj, 'c');
-        }
+    }
     else if (key == 3)
-        set_active_obj(rt, NULL, 'n');
+        set_active_obj(rt, NULL, 'C');
+    else if (key == 2)
+        set_active_obj(rt, NULL, 'L');
     return (0);
 }

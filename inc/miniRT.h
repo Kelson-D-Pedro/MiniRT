@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:48:06 by kpedro            #+#    #+#             */
-/*   Updated: 2025/04/24 13:12:37 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/24 14:51:38 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,10 @@ void	fill_elements(t_scene *rt);
 void	choice_who_fill(t_scene *rt, char **mat);
 void	put_map(t_scene *rt);
 void	init_3d_camera(t_scene *rt);
-void    x_axis_translate(t_vector *pos, double delta, char op, int ctrl);
-void    y_axis_translate(t_vector *pos, double delta, char op, int ctrl);
-void    z_axis_translate(t_vector *pos, double delta, char op, int ctrl);
+void    x_axis_translate(t_vector *pos, double delta, char op, int *ctrl);
+void    y_axis_translate(t_vector *pos, double delta, char op, int *ctrl);
+void    z_axis_translate(t_vector *pos, double delta, char op, int *ctrl);
+void	set_active_obj(t_scene *rt, t_pair *obj, char type);
 
 //
 //------------------------------- CHAR FUNCTIONS

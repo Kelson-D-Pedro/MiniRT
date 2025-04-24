@@ -6,7 +6,7 @@ SRC		=	miniRT \
 			src/vectors/vectors00 src/vectors/vectors01 \
 			src/scene/mlx00 src/scene/intersection00 src/scene/intersection01 src/scene/intersection02 \
 			src/scene/rays00 src/scene/render00 \
-			src/scene/shadow_light00 transformations00 \
+			src/scene/shadow_light00 src/scene/transformations00 \
 			src/scene/mlx_hooks00 src/scene/utills00 src/scene/utills01 \
 
 SRCS	=	$(addsuffix .c, ${SRC})
