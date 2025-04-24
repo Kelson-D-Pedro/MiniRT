@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:48:06 by kpedro            #+#    #+#             */
-/*   Updated: 2025/04/24 15:25:55 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/24 18:40:30 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,9 @@ void	x_axis_translate(t_vector *pos, double delta, char op, int *ctrl);
 void	y_axis_translate(t_vector *pos, double delta, char op, int *ctrl);
 void	z_axis_translate(t_vector *pos, double delta, char op, int *ctrl);
 void	set_active_obj(t_scene *rt, t_pair *obj, char type);
+void	x_axis_rotation(t_vector *pos, double angle, int *ctrl);
+void	y_axis_rotation(t_vector *pos, double angle, int *ctrl);
+void	z_axis_rotation(t_vector *pos, double angle, int *ctrl);
 
 //
 //------------------------------- CHAR FUNCTIONS

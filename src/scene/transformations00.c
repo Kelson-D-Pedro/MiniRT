@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 12:33:12 by kpedro            #+#    #+#             */
-/*   Updated: 2025/04/24 16:49:43 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/24 18:49:10 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,41 @@ void	z_axis_translate(t_vector *pos, double delta, char op, int *ctrl)
 		pos->z += delta;
 	else if (op == '-')
 		pos->z -= delta;
+	*ctrl = 1;
+}
+
+void	x_axis_rotation(t_vector *pos, double angle, int *ctrl)
+{
+	double	y;
+	double	z;
+
+	y = pos->y;
+	z = pos->z;
+	pos->y = (y * cos(angle)) - (z * sin(angle));
+	pos->z = (y * sin(angle)) + (z * cos(angle));
+	*ctrl = 1;
+}
+
+void	y_axis_rotation(t_vector *pos, double angle, int *ctrl)
+{
+	double	x;
+	double	z;
+
+	x = pos->x;
+	z = pos->z;
+	pos->x = (x * cos(angle)) + (z * sin(angle));
+	pos->z = (-x * sin(angle)) + (z * cos(angle));
+	*ctrl = 1;
+}
+
+void	z_axis_rotation(t_vector *pos, double angle, int *ctrl)
+{
+	double	x;
+	double	y;
+
+	x = pos->x;
+	y = pos->y;
+	pos->x = (x * cos(angle)) - (y * sin(angle));
+	pos->y = (x * sin(angle)) + (y * cos(angle));
 	*ctrl = 1;
 }

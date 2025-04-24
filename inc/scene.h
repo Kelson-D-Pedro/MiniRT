@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:47:54 by kpedro            #+#    #+#             */
-/*   Updated: 2025/04/24 15:26:12 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/24 19:18:34 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "vector.h"
 
-# define HEIGHT 1080
-# define WIDTH 1920
+# define HEIGHT 600
+# define WIDTH 900
 # define M_PI1 3.1415
 
 //
@@ -187,7 +187,7 @@ void					init_mlx_win(t_scene *rt);
 void					init_mlx_image(t_scene *rt);
 void					my_pixel_put(t_scene *rt, int x, int y, int color);
 int						select_obj(int key, int x, int y, void *arg);
-int						make_moves(int key, t_vector *pos, t_scene *rt);
+int						translation(int key, t_vector *pos, t_scene *rt);
 int						hooks(int key, void *arg);
 int						close_window(t_scene *rt);
 int						handle_keypress(int keycode, t_scene *rt);
