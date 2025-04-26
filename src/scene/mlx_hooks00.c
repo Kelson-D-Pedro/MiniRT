@@ -6,13 +6,13 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 19:44:35 by kpedro            #+#    #+#             */
-/*   Updated: 2025/04/24 19:26:03 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/26 13:05:54 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/miniRT.h"
 
-int	translation(int key, t_vector *pos, t_scene *rt)
+int	translation(int key, t_vector *pos, t_scene *rt, t_vector *dir)
 {
 	int	i;
 
@@ -29,18 +29,21 @@ int	translation(int key, t_vector *pos, t_scene *rt)
 		z_axis_translate(pos, 0.5, '+', &i);
 	else if (key == XK_m)
 		z_axis_translate(pos, 0.5, '-', &i);
-	else if (key == XK_q)	
-		x_axis_rotation(pos, 0.785398163, &i);
-	else if (key == XK_w)	
-		x_axis_rotation(pos, -0.785398163, &i);
-	else if (key == XK_a)	
-		y_axis_rotation(pos, 0.785398163, &i);
-	else if (key == XK_s)	
-		y_axis_rotation(pos, -0.785398163, &i);
-	else if (key == XK_z)	
-		z_axis_rotation(pos, 0.785398163, &i);
-	else if (key == XK_x)	
-		z_axis_rotation(pos, -0.785398163, &i);
+	if (dir)
+	{
+		if (key == XK_q)
+			x_axis_rotation(dir, 0.785398163, &i);
+		else if (key == XK_w)
+			x_axis_rotation(dir, -0.785398163, &i);
+		else if (key == XK_a)
+			y_axis_rotation(dir, 0.785398163, &i);
+		else if (key == XK_s)
+			y_axis_rotation(dir, -0.785398163, &i);
+		else if (key == XK_z)
+			z_axis_rotation(dir, 0.785398163, &i);
+		else if (key == XK_x)
+			z_axis_rotation(dir, -0.785398163, &i);
+	}
 	if (i)
 	{
 		put_map(rt);
@@ -53,15 +56,17 @@ int	translation(int key, t_vector *pos, t_scene *rt)
 static void	transformations(int key, t_scene *rt)
 {
 	if (rt->active_obj.type == 's')
-		translation(key, &rt->sphere[rt->active_obj.index].pos, rt);
+		translation(key, &rt->sphere[rt->active_obj.index].pos, rt, NULL);
 	else if (rt->active_obj.type == 'p')
-		translation(key, &rt->plane[rt->active_obj.index].pos, rt);
+		translation(key, &rt->plane[rt->active_obj.index].pos, rt,
+			&rt->plane[rt->active_obj.index].dir);
 	else if (rt->active_obj.type == 'c')
-		translation(key, &rt->cylinder[rt->active_obj.index].pos, rt);
+		translation(key, &rt->cylinder[rt->active_obj.index].pos, rt,
+			&rt->cylinder[rt->active_obj.index].dir);
 	else if (rt->active_obj.type == 'C')
-		translation(key, &rt->camera.pos, rt);
+		translation(key, &rt->camera.pos, rt, &rt->camera.dir);
 	else if (rt->active_obj.type == 'L')
-		translation(key, &rt->light.pos, rt);
+		translation(key, &rt->light.pos, rt, NULL);
 	if (key == XK_space)
 		set_active_obj(rt, NULL, 'N');
 }
