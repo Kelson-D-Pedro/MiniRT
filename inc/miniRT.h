@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:48:06 by kpedro            #+#    #+#             */
-/*   Updated: 2025/04/24 18:40:30 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/28 12:44:04 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ double	cylinder_cover_intersection(t_cylinder *cy, t_ray *ray);
 //------------------------------- VOID FUNCTIONS
 //
 
-void	get_scene_quantity(t_num_of_elements *element, char *str);
+void	get_elements_quantity(t_num_of_elements *element, char *str);
 void	fill_ambient_light(t_scene *rt, char **mat);
 void	fill_camera(t_scene *rt, char **mat);
 void	fill_light(t_scene *rt, char **mat);
@@ -75,12 +75,14 @@ void	set_active_obj(t_scene *rt, t_pair *obj, char type);
 void	x_axis_rotation(t_vector *pos, double angle, int *ctrl);
 void	y_axis_rotation(t_vector *pos, double angle, int *ctrl);
 void	z_axis_rotation(t_vector *pos, double angle, int *ctrl);
+void	cylinder_size_up_down(t_cylinder *cy, char op, double delta, int *i);
+void	sphere_size_up_down(t_sphere *sp, char op, double delta, int *i);
 
 //
 //------------------------------- CHAR FUNCTIONS
 //
 
-char	**get_map(char *file_name);
+char	**get_map(char *file_name, int i, int fd);
 
 //
 //------------------------------- T_SCENE FUNCTIONS

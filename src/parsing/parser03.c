@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 18:01:11 by kpedro            #+#    #+#             */
-/*   Updated: 2025/04/23 16:40:16 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/28 17:38:10 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int	verify_elements(char **mat)
 {
-	if (ft_strcmp(mat[matrix_size((void **)mat) - 1], "\n") == 0)
-		mat[matrix_size((void **)mat) - 1] = '\0';
 	if (ft_strcmp(mat[0], "A") == 0)
 		return (verify_ambient_light(mat));
 	else if (ft_strcmp(mat[0], "L") == 0)
@@ -73,7 +71,7 @@ int	verify_camera(char **mat)
 		return (1);
 	}
 	fov = ft_atod(mat[2], 1, 0, 0);
-	if ((fov < 0) || (fov > 180))
+	if ((fov <= 0) && (fov > 180))
 	{
 		ft_putstr_fd("Error\nFOV out of range in Camera\n", 2);
 		return (1);
@@ -109,19 +107,20 @@ int	verify_light(char **mat)
 
 int	verify_sphere(char **mat)
 {
-	int	i;
+	int	error;
 
+	error = 0;
 	if (matrix_size((void **)mat) != 4)
 	{
 		ft_putstr_fd("Error\nmissing or extra values in Sphere\n", 2);
 		return (1);
 	}
-	i = verify_vector_values(mat[1]);
-	i = verify_color(mat[3], 0);
+	error |= verify_vector_values(mat[1]);
+	error |= verify_color(mat[3], 0);
 	if (!str_is_digit(mat[2]))
 	{
 		ft_putstr_fd("Error\nnon-numeric in Sphere diameter's\n", 2);
 		return (1);
 	}
-	return (i);
+	return (error);
 }

@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 17:49:21 by kpedro            #+#    #+#             */
-/*   Updated: 2025/04/21 20:01:09 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/28 17:47:22 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,11 @@ static int	map_lines(char *file)
 	return (counter);
 }
 
-char	**get_map(char *file_name)
+char	**get_map(char *file_name, int i, int fd)
 {
-	int		fd;
-	int		i;
 	char	**map;
 	char	*line;
 
-	fd = open(file_name, O_RDONLY);
 	i = map_lines(file_name);
 	map = malloc(sizeof(char *) * (i + 1));
 	line = get_next_line(fd);
@@ -96,6 +93,13 @@ char	**get_map(char *file_name)
 		line = get_next_line(fd);
 	}
 	map[i] = NULL;
+	i = 0;
+	while (i < matrix_size((void **)map))
+	{
+		if (ft_strcmp(map[matrix_size((void **)map) - 1], "\n") == 0)
+			map[matrix_size((void **)map) - 1] = '\0';
+		i++;
+	}
 	close(fd);
 	return (map);
 }

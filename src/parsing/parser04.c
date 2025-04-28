@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 18:01:29 by kpedro            #+#    #+#             */
-/*   Updated: 2025/04/24 15:27:01 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/28 17:36:29 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,33 @@
 
 int	verify_plane(char **mat)
 {
-	int	i;
+	int	error;
 
+	error = 0;
 	if (matrix_size((void **)mat) != 4)
 	{
 		ft_putstr_fd("Error\nmissing values in Plane\n", 2);
 		return (1);
 	}
-	i = verify_vector_values(mat[1]);
-	i = verify_color(mat[3], 0);
-	i = verify_normalized_vector(mat[2]);
-	return (i);
+	error |= verify_vector_values(mat[1]);
+	error |= verify_color(mat[3], 0);
+	error |= verify_normalized_vector(mat[2]);
+	return (error);
 }
 
 int	verify_cylinder(char **mat)
 {
-	int	i;
+	int	error;
 
+	error = 0;
 	if (matrix_size((void **)mat) != 6)
 	{
 		ft_putstr_fd("Error\nmissing values in Cylinder\n", 2);
 		return (1);
 	}
-	i = verify_vector_values(mat[1]);
-	i = verify_color(mat[5], 0);
-	i = verify_normalized_vector(mat[2]);
+	error |= verify_vector_values(mat[1]);
+	error |= verify_color(mat[5], 0);
+	error |= verify_normalized_vector(mat[2]);
 	if (!str_is_digit(mat[3]))
 	{
 		ft_putstr_fd("Error\nnon-numeric in Cylinder diameter\n", 2);
@@ -49,7 +51,7 @@ int	verify_cylinder(char **mat)
 		ft_putstr_fd("Error\nnon-numeric in Cylinder height\n", 2);
 		return (1);
 	}
-	return (i);
+	return (error);
 }
 
 int	its_alright_to_start(t_scene *rt, char **argv, int argc)
@@ -59,7 +61,12 @@ int	its_alright_to_start(t_scene *rt, char **argv, int argc)
 		ft_putstr_fd("ERROR:\nHow to use:\n.\\miniRT filename", 2);
 		return (1);
 	}
-	rt->map = get_map(argv[1]);
+	if (open(argv[1], O_RDONLY) == -1)
+	{
+		ft_putstr_fd("ERROR: Ficheiro Invalido\n", 2);
+		return (1);
+	}
+	rt->map = get_map(argv[1], 0, 0);
 	if (!rt->map)
 	{
 		ft_putstr_fd("ERROR: Mapa Invalido\n", 2);

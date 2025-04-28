@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:41:49 by kpedro            #+#    #+#             */
-/*   Updated: 2025/04/24 15:26:52 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/28 13:03:34 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ int	verify_others_elements(t_scene *rt)
 
 int	verify_file_stuffs(char *file_name, t_scene *rt)
 {
-	if (verify_cap_elements(rt) || verify_others_elements(rt))
-	{
-		ft_putstr_fd("ERROR: Missing/Too Much Elements\n", 2);
-		return (1);
-	}
 	if (verify_file_extension(file_name))
 	{
 		ft_putstr_fd("ERROR: Wrong File Extension\n", 2);
+		return (1);
+	}
+	if (verify_cap_elements(rt) || verify_others_elements(rt))
+	{
+		ft_putstr_fd("ERROR: Missing/Too Much Elements\n", 2);
 		return (1);
 	}
 	return (0);

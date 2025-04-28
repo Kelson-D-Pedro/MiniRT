@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 18:04:59 by darwin            #+#    #+#             */
-/*   Updated: 2025/04/26 12:55:57 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/28 10:03:46 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,6 @@ t_pair	which_cylinder(t_scene *rt, t_ray *ray)
 	i = 0;
 	while (i < rt->nb.cylinder)
 	{
-		vector_normalize(&rt->cylinder[i].dir);
 		if (intersect_box(cylinder_box(&rt->cylinder[i]), ray))
 		{
 			t = cylinder_intersection(&rt->cylinder[i], ray);

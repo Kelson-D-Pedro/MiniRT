@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 15:26:37 by kpedro            #+#    #+#             */
-/*   Updated: 2025/04/23 16:40:12 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/28 17:30:24 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int	verify_rt_file(t_scene *rt)
 	j = 0;
 	while (rt->map[i])
 	{
-		mat = ft_split_exp(rt->map[i], ' ');
+		mat = ft_split(rt->map[i], ' ');
 		if (!mat)
 			return (1);
 		j = verify_elements(mat);

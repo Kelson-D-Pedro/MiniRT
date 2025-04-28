@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:35:47 by kpedro            #+#    #+#             */
-/*   Updated: 2025/04/24 19:20:41 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/28 12:59:51 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,16 @@ void	init_mlx_image(t_scene *rt)
 
 int	close_window(t_scene *rt)
 {
+	mlx_destroy_image(rt->mini_lx.mlx, rt->mini_lx.img);
 	mlx_destroy_window(rt->mini_lx.mlx, rt->mini_lx.win);
+	mlx_destroy_display(rt->mini_lx.mlx);
+	free_matrix((void **)rt->map);
+	if (rt->sphere)
+		free(rt->sphere);
+	if (rt->cylinder)
+		free(rt->cylinder);
+	if (rt->plane)
+		free(rt->plane);
 	free(rt->mini_lx.mlx);
 	exit(0);
 	return (0);

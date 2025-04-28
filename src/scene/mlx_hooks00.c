@@ -6,29 +6,14 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 19:44:35 by kpedro            #+#    #+#             */
-/*   Updated: 2025/04/26 13:05:54 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/28 13:29:07 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/miniRT.h"
 
-int	translation(int key, t_vector *pos, t_scene *rt, t_vector *dir)
+static void	moves_auxiliar(int key, t_scene *rt, t_vector *dir, int i)
 {
-	int	i;
-
-	i = 0;
-	if (key == XK_Left)
-		x_axis_translate(pos, 0.5, '-', &i);
-	else if (key == XK_Right)
-		x_axis_translate(pos, 0.5, '+', &i);
-	else if (key == XK_Up)
-		y_axis_translate(pos, 0.5, '+', &i);
-	else if (key == XK_Down)
-		y_axis_translate(pos, 0.5, '-', &i);
-	else if (key == XK_n)
-		z_axis_translate(pos, 0.5, '+', &i);
-	else if (key == XK_m)
-		z_axis_translate(pos, 0.5, '-', &i);
 	if (dir)
 	{
 		if (key == XK_q)
@@ -50,23 +35,49 @@ int	translation(int key, t_vector *pos, t_scene *rt, t_vector *dir)
 		mlx_put_image_to_window(rt->mini_lx.mlx, rt->mini_lx.win,
 			rt->mini_lx.img, 0, 0);
 	}
+}
+
+int	moves(int key, t_vector *pos, t_scene *rt, t_vector *dir)
+{
+	int	i;
+
+	i = 0;
+	if (key == XK_Left)
+		x_axis_translate(pos, 0.5, '-', &i);
+	else if (key == XK_Right)
+		x_axis_translate(pos, 0.5, '+', &i);
+	else if (key == XK_Up)
+		y_axis_translate(pos, 0.5, '+', &i);
+	else if (key == XK_Down)
+		y_axis_translate(pos, 0.5, '-', &i);
+	else if (key == XK_n)
+		z_axis_translate(pos, 0.5, '+', &i);
+	else if (key == XK_m)
+		z_axis_translate(pos, 0.5, '-', &i);
+	moves_auxiliar(key, rt, dir, i);
+	if (i)
+	{
+		put_map(rt);
+		mlx_put_image_to_window(rt->mini_lx.mlx, rt->mini_lx.win,
+			rt->mini_lx.img, 0, 0);
+	}
 	return (0);
 }
 
 static void	transformations(int key, t_scene *rt)
 {
 	if (rt->active_obj.type == 's')
-		translation(key, &rt->sphere[rt->active_obj.index].pos, rt, NULL);
+		moves(key, &rt->sphere[rt->active_obj.index].pos, rt, NULL);
 	else if (rt->active_obj.type == 'p')
-		translation(key, &rt->plane[rt->active_obj.index].pos, rt,
+		moves(key, &rt->plane[rt->active_obj.index].pos, rt,
 			&rt->plane[rt->active_obj.index].dir);
 	else if (rt->active_obj.type == 'c')
-		translation(key, &rt->cylinder[rt->active_obj.index].pos, rt,
+		moves(key, &rt->cylinder[rt->active_obj.index].pos, rt,
 			&rt->cylinder[rt->active_obj.index].dir);
 	else if (rt->active_obj.type == 'C')
-		translation(key, &rt->camera.pos, rt, &rt->camera.dir);
+		moves(key, &rt->camera.pos, rt, &rt->camera.dir);
 	else if (rt->active_obj.type == 'L')
-		translation(key, &rt->light.pos, rt, NULL);
+		moves(key, &rt->light.pos, rt, NULL);
 	if (key == XK_space)
 		set_active_obj(rt, NULL, 'N');
 }

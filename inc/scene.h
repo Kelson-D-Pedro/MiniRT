@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:47:54 by kpedro            #+#    #+#             */
-/*   Updated: 2025/04/26 12:40:23 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/28 10:40:02 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ typedef struct s_scene
 	t_mlx				mini_lx;
 	t_vector			right_3d;
 	t_vector			up_3d;
+	t_vector			left_inf_point;
 	double				viewport_height;
 	double				viewport_width;
 	char				**map;
@@ -187,7 +188,8 @@ void					init_mlx_win(t_scene *rt);
 void					init_mlx_image(t_scene *rt);
 void					my_pixel_put(t_scene *rt, int x, int y, int color);
 int						select_obj(int key, int x, int y, void *arg);
-int						translation(int key, t_vector *pos, t_scene *rt, t_vector *dir);
+int						moves(int key, t_vector *pos, t_scene *rt,
+							t_vector *dir);
 int						hooks(int key, void *arg);
 int						close_window(t_scene *rt);
 int						handle_keypress(int keycode, t_scene *rt);

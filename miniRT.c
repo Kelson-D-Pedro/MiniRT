@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:33:52 by kpedro            #+#    #+#             */
-/*   Updated: 2025/04/24 16:50:11 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/28 13:22:23 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,12 @@ int	main(int argc, char *argv[])
 {
 	t_scene	rt;
 
+	ft_bzero(&rt, sizeof(t_scene));
 	if (its_alright_to_start(&rt, argv, argc))
+	{
+		free_matrix((void **)rt.map);
 		return (1);
+	}
 	fill_elements(&rt);
 	init_3d_camera(&rt);
 	init_mlx_win(&rt);
@@ -29,6 +33,5 @@ int	main(int argc, char *argv[])
 	mlx_key_hook(rt.mini_lx.win, hooks, &rt);
 	mlx_hook(rt.mini_lx.win, 17, 0, close_window, &rt);
 	mlx_loop(rt.mini_lx.mlx);
-	free_matrix((void **)rt.map);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 12:33:12 by kpedro            #+#    #+#             */
-/*   Updated: 2025/04/24 18:49:10 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/28 10:37:51 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,5 @@ void	y_axis_rotation(t_vector *pos, double angle, int *ctrl)
 	z = pos->z;
 	pos->x = (x * cos(angle)) + (z * sin(angle));
 	pos->z = (-x * sin(angle)) + (z * cos(angle));
-	*ctrl = 1;
-}
-
-void	z_axis_rotation(t_vector *pos, double angle, int *ctrl)
-{
-	double	x;
-	double	y;
-
-	x = pos->x;
-	y = pos->y;
-	pos->x = (x * cos(angle)) - (y * sin(angle));
-	pos->y = (x * sin(angle)) + (y * cos(angle));
 	*ctrl = 1;
 }
