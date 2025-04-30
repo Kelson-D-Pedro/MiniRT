@@ -6,7 +6,7 @@
 /*   By: kpedro <kpedro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 17:49:21 by kpedro            #+#    #+#             */
-/*   Updated: 2025/04/28 17:47:22 by kpedro           ###   ########.fr       */
+/*   Updated: 2025/04/30 13:50:29 by kpedro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ char	**get_map(char *file_name, int i, int fd)
 
 	i = map_lines(file_name);
 	map = malloc(sizeof(char *) * (i + 1));
+	fd = open(file_name, O_RDONLY);
 	line = get_next_line(fd);
 	i = 0;
 	while (line)
